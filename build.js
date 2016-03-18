@@ -88,7 +88,7 @@
 	            _reactRouter.Route,
 	            { path: '/', component: _HeaderMenu2.default },
 	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _HomePage2.default }),
-	            _react2.default.createElement(_reactRouter.Route, { path: 'profile/:user', component: _Prof2.default })
+	            _react2.default.createElement(_reactRouter.Route, { path: 'profile/:user/:id', component: _Prof2.default })
 	        )
 	    )
 	), document.getElementById('root'));
@@ -26255,64 +26255,72 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _reactRouter = __webpack_require__(180);
+
 	var React = __webpack_require__(1);
 
 	var HeaderMenu = React.createClass({
-	    displayName: "HeaderMenu",
+	    displayName: 'HeaderMenu',
 
 	    render: function render() {
 	        return React.createElement(
-	            "div",
+	            'div',
 	            null,
 	            React.createElement(
-	                "div",
-	                { className: "Nav" },
+	                'div',
+	                { className: 'Nav' },
 	                React.createElement(
-	                    "div",
-	                    { className: "Menu" },
+	                    'div',
+	                    { className: 'Menu' },
 	                    React.createElement(
-	                        "div",
-	                        { className: "Hover" },
-	                        React.createElement("img", { className: "LolImage",
-	                            src: "https://lh6.googleusercontent.com/-IzoUthdKiYA/Vull4PO5fXI/AAAAAAAAAA4/zDoB0OTDEg4sO06rl02kuvvFuENEq9_-Q/s256-p/logo.png",
-	                            alt: "Logo" })
+	                        'div',
+	                        { className: 'Hover' },
+	                        React.createElement(
+	                            _reactRouter.Link,
+	                            { to: '/' },
+	                            React.createElement('img', { className: 'LolImage',
+	                                src: 'https://lh6.googleusercontent.com/-IzoUthdKiYA/Vull4PO5fXI/AAAAAAAAAA4/zDoB0OTDEg4sO06rl02kuvvFuENEq9_-Q/s256-p/logo.png',
+	                                alt: 'Logo'
+	                            })
+	                        )
 	                    ),
 	                    React.createElement(
-	                        "div",
-	                        { className: "MenuRight" },
+	                        'div',
+	                        { className: 'MenuRight' },
 	                        React.createElement(
-	                            "div",
-	                            { className: "Hover" },
-	                            React.createElement("img", { className: "LolImage",
-	                                src: "https://lh3.googleusercontent.com/-_s9ls0NuuBs/Vull4W1SYrI/AAAAAAAAABA/6wERcNgCmZoQbRWEZ6OUSkipE970gMbaw/w126-h125-p/search.png",
-	                                alt: "Searsh" })
+	                            'div',
+	                            { className: 'Hover' },
+	                            React.createElement('img', { className: 'LolImage',
+	                                src: 'https://lh3.googleusercontent.com/-_s9ls0NuuBs/Vull4W1SYrI/AAAAAAAAABA/6wERcNgCmZoQbRWEZ6OUSkipE970gMbaw/w126-h125-p/search.png',
+	                                alt: 'Searsh' })
 	                        ),
 	                        React.createElement(
-	                            "div",
-	                            { className: "Hover" },
-	                            React.createElement("div", { className: "Sms" }),
+	                            'div',
+	                            { className: 'Hover' },
+	                            React.createElement('div', { className: 'Sms' }),
 	                            React.createElement(
-	                                "div",
-	                                { className: "MenuTextSms" },
-	                                "1"
+	                                'div',
+	                                { className: 'MenuTextSms' },
+	                                '1'
 	                            )
 	                        ),
 	                        React.createElement(
-	                            "div",
-	                            { className: "Hover" },
+	                            'div',
+	                            { className: 'Hover' },
 	                            React.createElement(
-	                                "span",
-	                                { className: "MenuTextName" },
-	                                "name"
+	                                'span',
+	                                { className: 'MenuTextName' },
+	                                'name'
 	                            ),
-	                            React.createElement("img", { className: "LolImage Square Circle",
-	                                src: "https://lh3.googleusercontent.com/-2ISHLNjuIts/Vull4KcLT-I/AAAAAAAAAA8/iC8vzN3ycTU8McfvZzA5iZ700Sezpddiw/w595-h334-no/Non.png",
-	                                alt: "Ava" })
+	                            React.createElement('img', { className: 'LolImage Square Circle',
+	                                src: 'https://lh3.googleusercontent.com/-2ISHLNjuIts/Vull4KcLT-I/AAAAAAAAAA8/iC8vzN3ycTU8McfvZzA5iZ700Sezpddiw/w595-h334-no/Non.png',
+	                                alt: 'Ava' })
 	                        )
 	                    )
 	                )
@@ -26352,7 +26360,7 @@
 	            { className: 'Block' },
 	            React.createElement(
 	                _reactRouter.Link,
-	                { to: "/profile/" + this.props.data.username },
+	                { to: "/profile/" + this.props.data.username + "/" + this.props.data.id },
 	                React.createElement('img', { className: 'MediumImage Right Hover',
 	                    src: 'https://static-cdn.jtvnw.net/jtv_user_pictures/c_a_k_e-profile_image-b25ae37f0296d0f1-300x300.jpeg',
 	                    alt: '' })
@@ -26402,7 +26410,7 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -26412,54 +26420,62 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRedux = __webpack_require__(159);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Test = _react2.default.createClass({
-	    displayName: "Test",
-
+	    displayName: 'Test',
 
 	    render: function render() {
+	        var post = this.props.news;
 	        return _react2.default.createElement(
-	            "div",
-	            { className: "Block" },
-	            _react2.default.createElement("img", { className: "MediumImage Right Hover",
-	                src: "https://static-cdn.jtvnw.net/jtv_user_pictures/c_a_k_e-profile_image-b25ae37f0296d0f1-300x300.jpeg",
-	                alt: "" }),
+	            'div',
+	            { className: 'Block' },
+	            _react2.default.createElement('img', { className: 'MediumImage Right Hover',
+	                src: 'https://static-cdn.jtvnw.net/jtv_user_pictures/c_a_k_e-profile_image-b25ae37f0296d0f1-300x300.jpeg',
+	                alt: '' }),
 	            _react2.default.createElement(
-	                "div",
-	                { className: "RowAll" },
+	                'div',
+	                { className: 'RowAll' },
 	                _react2.default.createElement(
-	                    "div",
+	                    'div',
 	                    null,
 	                    _react2.default.createElement(
-	                        "h4",
-	                        { className: "PostText" },
-	                        "asdfghjk"
+	                        'h4',
+	                        { className: 'PostText' },
+	                        this.props.params.user
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    "div",
+	                    'div',
 	                    null,
 	                    _react2.default.createElement(
-	                        "h4",
-	                        { className: "PostText" },
+	                        'h4',
+	                        { className: 'PostText' },
 	                        _react2.default.createElement(
-	                            "span",
-	                            { className: "Marker" },
-	                            "Rating asdfghjk"
+	                            'span',
+	                            { className: 'Marker' },
+	                            'Rating ',
+	                            post[this.props.params.id - 1].rating
 	                        )
 	                    )
 	                )
 	            ),
 	            _react2.default.createElement(
-	                "p",
-	                { className: "PostText" },
-	                "asdfghjk"
+	                'p',
+	                { className: 'PostText' },
+	                post[this.props.params.id - 1].description
 	            )
 	        );
 	    }
 	});
-	exports.default = Test;
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	    return {
+	        news: state.news,
+	        newCompany: state.newCompany
+	    };
+	})(Test);
 	/**
 	 * Created by Artsiom_Rakitski on 3/18/2016.
 	 */
