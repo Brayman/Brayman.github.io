@@ -84,9 +84,12 @@
 	    _react2.default.createElement(
 	        _reactRouter.Router,
 	        { history: _reactRouter.browserHistory },
-	        _react2.default.createElement(_HeaderMenu2.default, null),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/', component: _HomePage2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: 'profile', component: _Prof2.default })
+	        _react2.default.createElement(
+	            _reactRouter.Route,
+	            { path: '/', component: _HeaderMenu2.default },
+	            _react2.default.createElement(_reactRouter.IndexRoute, { component: _HomePage2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: 'profile/:user', component: _Prof2.default })
+	        )
 	    )
 	), document.getElementById('root'));
 
@@ -26186,8 +26189,6 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(_HeaderMenu2.default, null),
-	      _react2.default.createElement('i', { className: 'galochka' }),
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'NewsColumn' },
@@ -26257,63 +26258,68 @@
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	var React = __webpack_require__(1);
 
 	var HeaderMenu = React.createClass({
-	  displayName: "HeaderMenu",
+	    displayName: "HeaderMenu",
 
-	  render: function render() {
-	    return React.createElement(
-	      "div",
-	      { className: "Nav" },
-	      React.createElement(
-	        "div",
-	        { className: "Menu" },
-	        React.createElement(
-	          "div",
-	          { className: "Hover" },
-	          React.createElement("img", { className: "LolImage",
-	            src: "https://lh6.googleusercontent.com/-IzoUthdKiYA/Vull4PO5fXI/AAAAAAAAAA4/zDoB0OTDEg4sO06rl02kuvvFuENEq9_-Q/s256-p/logo.png",
-	            alt: "Logo" })
-	        ),
-	        React.createElement(
-	          "div",
-	          { className: "MenuRight" },
-	          React.createElement(
+	    render: function render() {
+	        return React.createElement(
 	            "div",
-	            { className: "Hover" },
-	            React.createElement("img", { className: "LolImage",
-	              src: "https://lh3.googleusercontent.com/-_s9ls0NuuBs/Vull4W1SYrI/AAAAAAAAABA/6wERcNgCmZoQbRWEZ6OUSkipE970gMbaw/w126-h125-p/search.png",
-	              alt: "Searsh" })
-	          ),
-	          React.createElement(
-	            "div",
-	            { className: "Hover" },
-	            React.createElement("div", { className: "Sms" }),
+	            null,
 	            React.createElement(
-	              "div",
-	              { className: "MenuTextSms" },
-	              "1"
-	            )
-	          ),
-	          React.createElement(
-	            "div",
-	            { className: "Hover" },
-	            React.createElement(
-	              "span",
-	              { className: "MenuTextName" },
-	              "name"
+	                "div",
+	                { className: "Nav" },
+	                React.createElement(
+	                    "div",
+	                    { className: "Menu" },
+	                    React.createElement(
+	                        "div",
+	                        { className: "Hover" },
+	                        React.createElement("img", { className: "LolImage",
+	                            src: "https://lh6.googleusercontent.com/-IzoUthdKiYA/Vull4PO5fXI/AAAAAAAAAA4/zDoB0OTDEg4sO06rl02kuvvFuENEq9_-Q/s256-p/logo.png",
+	                            alt: "Logo" })
+	                    ),
+	                    React.createElement(
+	                        "div",
+	                        { className: "MenuRight" },
+	                        React.createElement(
+	                            "div",
+	                            { className: "Hover" },
+	                            React.createElement("img", { className: "LolImage",
+	                                src: "https://lh3.googleusercontent.com/-_s9ls0NuuBs/Vull4W1SYrI/AAAAAAAAABA/6wERcNgCmZoQbRWEZ6OUSkipE970gMbaw/w126-h125-p/search.png",
+	                                alt: "Searsh" })
+	                        ),
+	                        React.createElement(
+	                            "div",
+	                            { className: "Hover" },
+	                            React.createElement("div", { className: "Sms" }),
+	                            React.createElement(
+	                                "div",
+	                                { className: "MenuTextSms" },
+	                                "1"
+	                            )
+	                        ),
+	                        React.createElement(
+	                            "div",
+	                            { className: "Hover" },
+	                            React.createElement(
+	                                "span",
+	                                { className: "MenuTextName" },
+	                                "name"
+	                            ),
+	                            React.createElement("img", { className: "LolImage Square Circle",
+	                                src: "https://lh3.googleusercontent.com/-2ISHLNjuIts/Vull4KcLT-I/AAAAAAAAAA8/iC8vzN3ycTU8McfvZzA5iZ700Sezpddiw/w595-h334-no/Non.png",
+	                                alt: "Ava" })
+	                        )
+	                    )
+	                )
 	            ),
-	            React.createElement("img", { className: "LolImage Square Circle",
-	              src: "https://lh3.googleusercontent.com/-2ISHLNjuIts/Vull4KcLT-I/AAAAAAAAAA8/iC8vzN3ycTU8McfvZzA5iZ700Sezpddiw/w595-h334-no/Non.png",
-	              alt: "Ava" })
-	          )
-	        )
-	      )
-	    );
-	  }
+	            this.props.children
+	        );
+	    }
 	});
 
 	exports.default = HeaderMenu;
@@ -26326,54 +26332,61 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+
+	var _reactRouter = __webpack_require__(180);
+
 	var React = __webpack_require__(1);
 
 	var ListInfo = React.createClass({
-	    displayName: "ListInfo",
+	    displayName: 'ListInfo',
 
 
 	    render: function render() {
 	        return React.createElement(
-	            "div",
-	            { className: "Block" },
-	            React.createElement("img", { className: "MediumImage Right Hover",
-	                src: "https://static-cdn.jtvnw.net/jtv_user_pictures/c_a_k_e-profile_image-b25ae37f0296d0f1-300x300.jpeg",
-	                alt: "" }),
+	            'div',
+	            { className: 'Block' },
 	            React.createElement(
-	                "div",
-	                { className: "RowAll" },
+	                _reactRouter.Link,
+	                { to: "/profile/" + this.props.data.username },
+	                React.createElement('img', { className: 'MediumImage Right Hover',
+	                    src: 'https://static-cdn.jtvnw.net/jtv_user_pictures/c_a_k_e-profile_image-b25ae37f0296d0f1-300x300.jpeg',
+	                    alt: '' })
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: 'RowAll' },
 	                React.createElement(
-	                    "div",
+	                    'div',
 	                    null,
 	                    React.createElement(
-	                        "h4",
-	                        { className: "PostText" },
+	                        'h4',
+	                        { className: 'PostText' },
 	                        this.props.data.username
 	                    )
 	                ),
 	                React.createElement(
-	                    "div",
+	                    'div',
 	                    null,
 	                    React.createElement(
-	                        "h4",
-	                        { className: "PostText" },
+	                        'h4',
+	                        { className: 'PostText' },
 	                        React.createElement(
-	                            "span",
-	                            { className: "Marker" },
-	                            "Rating ",
+	                            'span',
+	                            { className: 'Marker' },
+	                            'Rating ',
 	                            this.props.data.rating
 	                        )
 	                    )
 	                )
 	            ),
 	            React.createElement(
-	                "p",
-	                { className: "PostText" },
+	                'p',
+	                { className: 'PostText' },
 	                this.props.data.description
 	            )
 	        );
