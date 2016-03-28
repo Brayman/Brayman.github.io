@@ -26193,7 +26193,7 @@
 	var HomePage = _react2.default.createClass({
 	  displayName: 'HomePage',
 	  componentWillMount: function componentWillMount() {
-	    //this.props.dispatch(loadPostData())
+	    this.props.dispatch((0, _actions.getPost)());
 	  },
 
 	  render: function render() {
@@ -26335,33 +26335,72 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.newUser = newUser;
-	exports.registr = registr;
-	exports.registrUser = registrUser;
-	exports.logIn = logIn;
+	exports.getPost = getPost;
+	exports.registration = registration;
+	exports.login = login;
+	exports.getProfileData = getProfileData;
 	exports.getUserData = getUserData;
-	exports.loadPostData = loadPostData;
+	exports.newUser = newUser;
 	exports.saveChanges = saveChanges;
-	function newUser(impotantData) {
+	var url = 'https://peaceful-temple-19728.herokuapp.com';
+	//const url= 'http://10.26.11.88/';
+	//const url= ''
+
+	//--middleware
+
+	function getPost() {
 	    return {
-	        type: "REGISTRATION_NEW_USER",
-	        impotantData: impotantData
+	        type: 'LOAD',
+	        actions: ['LOAD_POST', 'LOAD_POST_SUCCESS', 'LOAD_POST_FAILURE'],
+	        promise: loadPost()
 	    };
 	}
-	function registr(impotantData) {
+	function registration(impotantData) {
 	    return {
-	        type: "REGISTRATION",
-	        actions: ['SEND', 'SEND_SUCCESS', 'SEND_FAILURE'],
+	        type: "SEND",
+	        actions: ['SEND_DATA', 'SEND_DATA_SUCCESS', 'SEND_DATA_FAILURE'],
 	        promise: registrUser(impotantData)
 	    };
 	}
+	function login(data) {
+	    return {
+	        type: 'SEND',
+	        actions: ['SEND_LOGIN_DATA', 'SEND_LOGIN_DATA_SUCCESS', 'SEND_LOGIN_DATA_FAILURE'],
+	        promise: sendLoginData(data)
+	    };
+	}
+	function getProfileData() {
+	    return {
+	        type: 'LOAD',
+	        actions: ['LOAD_USER', 'LOAD_USER_SUCCESS', 'LOAD_USER_FAILURE'],
+	        promise: loadProfile()
+	    };
+	}
+	//--requests
+
+	function loadPost() {
+	    return fetch(url + '/posts').then(function (resp) {
+	        return resp.json();
+	    });
+	}
 	function registrUser(data) {
-	    fetch('https://peaceful-temple-19728.herokuapp.com/users', {
+	    fetch(url + '/users', {
+	        method: 'post',
+	        mode: 'no-cors',
+	        headers: {
+	            'Accept': 'application/json',
+	            'Content-Type': "application/json"
+	        },
+	        body: JSON.stringify(data)
+	    });
+	}
+	function sendLoginData(data) {
+	    fetch(url, {
 	        method: 'post',
 	        headers: {
 	            'Accept': 'application/json',
@@ -26370,29 +26409,27 @@
 	        body: JSON.stringify(data)
 	    });
 	}
-	function logIn() {
-	    return {
-	        type: "LOG_IN"
-	    };
+	function loadProfile() {
+	    return fetch(url + '/users').then(function (resp) {
+	        return resp.json();
+	    });
 	}
+
+	//--other
+
 	function getUserData(username) {
 	    console.log(username);
 	    return {
 	        type: "GET_PROFILE"
 	    };
 	}
-	function loadPostData() {
+	function newUser(impotantData) {
 	    return {
-	        type: 'LOAD_POSTS',
-	        actions: ['LOAD_POST', 'LOAD_POST_SUCCESS', 'LOAD_POST_FAILURE'],
-	        promise: getData()
+	        type: "REGISTRATION_NEW_USER",
+	        impotantData: impotantData
 	    };
 	}
-	function getData() {
-	    return fetch('https://peaceful-temple-19728.herokuapp.com/posts').then(function (resp) {
-	        return resp.json();
-	    });
-	}
+
 	function saveChanges(changes) {
 	    return {
 	        type: 'NEW_PROFILE_DATA',
@@ -26433,7 +26470,7 @@
 	    displayName: 'Profile',
 	    componentWillMount: function componentWillMount() {
 	        //this.props.dispatch(loadUserData())
-	        this.props.dispatch((0, _actions.getUserData)(this.props.params.user));
+	        this.props.dispatch((0, _actions.getProfileData)(this.props.params.user));
 	    },
 
 	    render: function render() {
@@ -26569,9 +26606,15 @@
 
 	var _reactRedux = __webpack_require__(159);
 
+	var _redux = __webpack_require__(165);
+
 	var _actions = __webpack_require__(238);
 
+	var Actions = _interopRequireWildcard(_actions);
+
 	var _reactRouter = __webpack_require__(180);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	var React = __webpack_require__(1);
 
@@ -26579,52 +26622,43 @@
 	    displayName: 'HeaderMenu',
 
 	    render: function render() {
-	        var _this = this;
-
+	        var action = (0, _redux.bindActionCreators)(Actions, this.props.dispatch);
 	        return React.createElement(
 	            'div',
 	            null,
 	            React.createElement(
 	                'div',
-	                { className: 'Nav' },
+	                { className: 'PanelForMenu' },
 	                React.createElement(
 	                    'div',
 	                    { className: 'Menu' },
 	                    React.createElement(
 	                        'div',
-	                        { className: 'Hover' },
+	                        null,
 	                        React.createElement(
 	                            _reactRouter.Link,
 	                            { to: '/' },
-	                            React.createElement('img', { className: 'LolImage',
-	                                src: 'https://lh6.googleusercontent.com/-IzoUthdKiYA/Vull4PO5fXI/AAAAAAAAAA4/zDoB0OTDEg4sO06rl02kuvvFuENEq9_-Q/s256-p/logo.png',
-	                                alt: 'Logo'
-	                            })
+	                            React.createElement('img', { className: 'Image ImgStyleM',
+	                                src: 'https://lh6.googleusercontent.com/-IzoUthdKiYA/Vull4PO5fXI/AAAAAAAAAA4/zDoB0OTDEg4sO06rl02kuvvFuENEq9_-Q/s256-p/logo.png' })
 	                        )
 	                    ),
 	                    React.createElement(
 	                        'div',
-	                        { className: 'MenuRight' },
+	                        { className: 'DFlex' },
 	                        React.createElement(
-	                            'div',
-	                            { className: 'Hover' },
-	                            React.createElement('img', { className: 'LolImage',
-	                                src: 'https://lh3.googleusercontent.com/-_s9ls0NuuBs/Vull4W1SYrI/AAAAAAAAABA/6wERcNgCmZoQbRWEZ6OUSkipE970gMbaw/w126-h125-p/search.png',
-	                                alt: 'Searsh' })
+	                            'i',
+	                            { className: 'Icon IconStyleM' },
+	                            'search'
 	                        ),
 	                        React.createElement(
-	                            'div',
-	                            { className: 'Hover' },
-	                            React.createElement('div', { className: 'Sms' }),
-	                            React.createElement(
-	                                'div',
-	                                { className: 'MenuTextSms' },
-	                                '1'
-	                            )
+	                            'i',
+	                            { className: 'Icon IconStyleM' },
+	                            'mail'
 	                        ),
-	                        React.createElement(Login, { userData: { name: this.props.userData.name, username: this.props.userData.username },
-	                            logInClick: function logInClick() {
-	                                return _this.props.dispatch((0, _actions.loadPostData)());
+	                        React.createElement(Login, { userData: { name: this.props.userData.name, username: this.props.userData.username }
+	                            //logInClick={data=>this.props.dispatch(login(data))}/>
+	                            , logInClick: function logInClick(data) {
+	                                return action.login(data);
 	                            } })
 	                    )
 	                )
@@ -26637,27 +26671,88 @@
 	    displayName: 'Login',
 
 	    onLogInClick: function onLogInClick() {
-	        this.props.logInClick();
+	        var name = this.refs.username.value;
+	        var password = this.refs.password.value;
+	        this.refs.password.value = '';
+	        this.refs.username.value = '';
+	        this.props.logInClick({ username: name, password: password });
 	    },
 	    render: function render() {
 	        var login;
 	        if (this.props.userData.username == null) {
-
 	            login = React.createElement(
-	                'div',
-	                null,
+	                'ul',
+	                { className: 'menu' },
 	                React.createElement(
-	                    'button',
-	                    { onClick: this.onLogInClick, className: 'Whiteee MenuBtnMargin' },
-	                    'Sign in'
-	                ),
-	                React.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/signin' },
+	                    'li',
+	                    null,
 	                    React.createElement(
 	                        'button',
-	                        { className: 'Greennn MenuBtnMargin' },
-	                        'Sign up'
+	                        { className: 'Button BtnStyleM menu' },
+	                        'Sign'
+	                    ),
+	                    React.createElement(
+	                        'ul',
+	                        null,
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                'a',
+	                                { className: 'RowBetween' },
+	                                React.createElement(
+	                                    'div',
+	                                    { className: 'TextStyleM' },
+	                                    'Username'
+	                                ),
+	                                React.createElement(
+	                                    'div',
+	                                    null,
+	                                    React.createElement('input', { tute: 'text', ref: 'username', className: 'Label InputStyleM' })
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                'a',
+	                                { className: 'RowBetween' },
+	                                React.createElement(
+	                                    'div',
+	                                    { className: 'TextStyleM' },
+	                                    'Password'
+	                                ),
+	                                React.createElement(
+	                                    'div',
+	                                    null,
+	                                    React.createElement('input', { tute: 'text', ref: 'password', className: 'Label InputStyleM' })
+	                                )
+	                            )
+	                        ),
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement(
+	                                'button',
+	                                { className: 'Button Sign WhiteBtn', onClick: this.onLogInClick },
+	                                'Sign in'
+	                            ),
+	                            React.createElement(
+	                                'div',
+	                                { className: 'TextStyleM' },
+	                                'or'
+	                            ),
+	                            React.createElement(
+	                                _reactRouter.Link,
+	                                { to: '/signin' },
+	                                React.createElement(
+	                                    'button',
+	                                    { className: 'Button Sign GreenBtn' },
+	                                    'Sign up'
+	                                )
+	                            )
+	                        )
 	                    )
 	                )
 	            );
@@ -26745,7 +26840,7 @@
 	                )
 	            ),
 	            React.createElement(Inputs, { registrData: function registrData(data) {
-	                    return _this.props.dispatch((0, _actions.registr)(data));
+	                    return _this.props.dispatch((0, _actions.registration)(data));
 	                } })
 	        );
 	    }
@@ -26975,13 +27070,13 @@
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	var _getPostMiddleware = __webpack_require__(247);
+	var _getData = __webpack_require__(247);
 
-	var _getPostMiddleware2 = _interopRequireDefault(_getPostMiddleware);
+	var _getData2 = _interopRequireDefault(_getData);
 
-	var _postRegistrDataMiddleware = __webpack_require__(248);
+	var _sendData = __webpack_require__(248);
 
-	var _postRegistrDataMiddleware2 = _interopRequireDefault(_postRegistrDataMiddleware);
+	var _sendData2 = _interopRequireDefault(_sendData);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26989,7 +27084,7 @@
 
 	var reducer = (0, _redux.combineReducers)(reducers);
 	var logger = (0, _reduxLogger2.default)();
-	var cswm = (0, _redux.applyMiddleware)(_getPostMiddleware2.default, _postRegistrDataMiddleware2.default, logger)(_redux.createStore);
+	var cswm = (0, _redux.applyMiddleware)(_getData2.default, _sendData2.default, logger)(_redux.createStore);
 
 	var store = cswm(reducer, {
 	    userData: {
@@ -27061,16 +27156,14 @@
 	    var action = arguments[1];
 
 	    switch (action.type) {
-	        case 'LOAD_DATA_SUCCESS':
-	            return action.data;
-	        case 'GET_PROFILE':
+	        case 'LOAD_USER_SUCCESS':
 	            return Object.assign({}, state, {
-	                username: "test-user",
+	                username: action.data[11].username,
+	                id: action.data[11]._id,
 	                type: 'user',
 	                description: 'Предпринимательство, предпринимательская деятельность — экономическая деятельность' + ', направленная на систематическое получение прибыли от производства и продажи товаров, оказания ' + 'услуг. Для этой цели используется имущество, нематериальные активы, труд как самого' + ' предпринимателя, так и привлечённые со стороны. Нет гарантий, что затраченные средства окупятся,' + ' что произведённое будет продано с прибылью. С этим связан риск потерь всего или части имущества.',
-	                rating: 66,
 	                contact: Object.assign(state.contact, {
-	                    mail: 'test@mail.ru'
+	                    mail: action.data[11].mail
 	                })
 	            });
 	        default:
@@ -27107,6 +27200,15 @@
 	                    mail: action.impotantData.mail
 	                })
 	            });
+	        case 'SEND_SUCCESS':
+	            return Object.assign({}, state, {
+	                username: action.data.username,
+	                type: 'user',
+	                contact: Object.assign(state.contact, {
+	                    mail: action.data.mail
+	                })
+	            });
+
 	        case 'REGISTRATION':
 	            return Object.assign({}, state, {
 	                username: action.impotantData.username,
@@ -27126,15 +27228,6 @@
 	                    phone: action.data.contact.phone || state.contact.phone
 	                })
 	            });
-	        case 'LOG_IN':
-	            return Object.assign({}, state, {
-	                username: "test-user",
-	                type: 'user',
-	                description: 'Предпринимательство, предпринимательская деятельность — экономическая деятельность' + ', направленная на систематическое получение прибыли от производства и продажи товаров, оказания ' + 'услуг. Для этой цели используется имущество, нематериальные активы, труд как самого' + ' предпринимателя, так и привлечённые со стороны. Нет гарантий, что затраченные средства окупятся,' + ' что произведённое будет продано с прибылью. С этим связан риск потерь всего или части имущества.',
-	                contact: Object.assign(state.contact, {
-	                    mail: 'test@mail.ru'
-	                })
-	            });
 	        default:
 	            return state;
 	    }
@@ -27145,6 +27238,7 @@
 	 */
 	var defaultState = {
 	    userData: {
+	        id: null,
 	        username: null,
 	        name: null,
 	        type: null,
@@ -27406,10 +27500,10 @@
 
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-	var middleware = function middleware(store) {
+	var getData = function getData(store) {
 	    return function (next) {
 	        return function (action) {
-	            if (action.type !== 'LOAD_POSTS') {
+	            if (action.type !== 'LOAD') {
 	                return next(action);
 	            }
 
@@ -27437,13 +27531,13 @@
 	        };
 	    };
 	};
-	exports.default = middleware;
+	exports.default = getData;
 
 	/**
 	 * Created by Artsiom_Rakitski on 3/23/2016.
 	 */
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "getPostMiddleware.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "getData.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 248 */
@@ -27459,10 +27553,10 @@
 
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-	var registrat = function registrat(store) {
+	var sendData = function sendData(store) {
 	    return function (next) {
 	        return function (action) {
-	            if (action.type !== 'REGISTRATION') {
+	            if (action.type !== 'SEND') {
 	                return next(action);
 	            }
 
@@ -27476,17 +27570,18 @@
 	                type: startAction
 	            });
 	            store.dispatch({
-	                type: successAction
+	                type: successAction,
+	                data: action.data
 	            });
 	        };
 	    };
 	};
-	exports.default = registrat;
+	exports.default = sendData;
 	/**
 	 * Created by Artsiom_Rakitski on 3/25/2016.
 	 */
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "postRegistrDataMiddleware.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "sendData.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ }
 /******/ ]);
