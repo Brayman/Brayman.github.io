@@ -64,23 +64,23 @@
 
 	var _HomePage2 = _interopRequireDefault(_HomePage);
 
-	var _Profile = __webpack_require__(239);
+	var _Profile = __webpack_require__(241);
 
 	var _Profile2 = _interopRequireDefault(_Profile);
 
-	var _HeaderMenu = __webpack_require__(240);
+	var _HeaderMenu = __webpack_require__(242);
 
 	var _HeaderMenu2 = _interopRequireDefault(_HeaderMenu);
 
-	var _Registration = __webpack_require__(241);
+	var _Registration = __webpack_require__(243);
 
 	var _Registration2 = _interopRequireDefault(_Registration);
 
-	var _Settings = __webpack_require__(242);
+	var _Settings = __webpack_require__(244);
 
 	var _Settings2 = _interopRequireDefault(_Settings);
 
-	var _state = __webpack_require__(243);
+	var _state = __webpack_require__(245);
 
 	var _state2 = _interopRequireDefault(_state);
 
@@ -26246,7 +26246,7 @@
 	      'div',
 	      null,
 	      post.map(function (post) {
-	        return _react2.default.createElement(_ListInfo2.default, { key: post.id, data: post });
+	        return _react2.default.createElement(_ListInfo2.default, { key: post._id, data: post });
 	      })
 	    );
 	  }
@@ -26344,10 +26344,17 @@
 	exports.registration = registration;
 	exports.login = login;
 	exports.getProfileData = getProfileData;
+	exports.saveChanges = saveChanges;
 	exports.getUserData = getUserData;
 	exports.newUser = newUser;
-	exports.saveChanges = saveChanges;
-	var url = 'https://peaceful-temple-19728.herokuapp.com';
+
+	var _isomorphicFetch = __webpack_require__(239);
+
+	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var url = 'https://peaceful-temple-19728.herokuapp.com/';
 	//const url= 'http://10.26.11.88/';
 	//const url= ''
 
@@ -26374,24 +26381,40 @@
 	        promise: sendLoginData(data)
 	    };
 	}
-	function getProfileData() {
+	function getProfileData(user) {
 	    return {
 	        type: 'LOAD',
 	        actions: ['LOAD_USER', 'LOAD_USER_SUCCESS', 'LOAD_USER_FAILURE'],
-	        promise: loadProfile()
+	        promise: loadProfile(user)
+	    };
+	}
+	function saveChanges(changes) {
+	    return {
+	        type: 'NEW_PROFILE_DATA',
+	        actions: ['LOAD_USER', 'LOAD_USER_SUCCESS', 'LOAD_USER_FAILURE'],
+	        promise: newChanges(changes)
 	    };
 	}
 	//--requests
 
 	function loadPost() {
-	    return fetch(url + '/posts').then(function (resp) {
+	    return (0, _isomorphicFetch2.default)(url + 'users').then(function (resp) {
 	        return resp.json();
 	    });
 	}
 	function registrUser(data) {
-	    fetch(url + '/users', {
+	    (0, _isomorphicFetch2.default)(url + 'users', {
 	        method: 'post',
-	        mode: 'no-cors',
+	        headers: {
+	            'Accept': 'application/json',
+	            'Content-Type': "application/json"
+	        },
+	        body: JSON.stringify(data)
+	    });
+	}
+	function newChanges(data) {
+	    (0, _isomorphicFetch2.default)(url + 'settings', {
+	        method: 'post',
 	        headers: {
 	            'Accept': 'application/json',
 	            'Content-Type': "application/json"
@@ -26400,17 +26423,26 @@
 	    });
 	}
 	function sendLoginData(data) {
-	    fetch(url, {
+	    return (0, _isomorphicFetch2.default)(url, {
 	        method: 'post',
 	        headers: {
 	            'Accept': 'application/json',
 	            'Content-Type': "application/json"
 	        },
 	        body: JSON.stringify(data)
+	    }).then(function (resp) {
+	        return resp.json();
 	    });
 	}
-	function loadProfile() {
-	    return fetch(url + '/users').then(function (resp) {
+	function loadProfile(user) {
+	    return (0, _isomorphicFetch2.default)(url + 'profile', {
+	        method: 'post',
+	        headers: {
+	            'Accept': 'application/json',
+	            'Content-Type': "application/json"
+	        },
+	        body: JSON.stringify({ username: user })
+	    }).then(function (resp) {
 	        return resp.json();
 	    });
 	}
@@ -26430,12 +26462,6 @@
 	    };
 	}
 
-	function saveChanges(changes) {
-	    return {
-	        type: 'NEW_PROFILE_DATA',
-	        data: changes
-	    };
-	}
 	/**
 	 * Created by Artsiom_Rakitski on 3/10/2016.
 	 */
@@ -26444,6 +26470,413 @@
 
 /***/ },
 /* 239 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// the whatwg-fetch polyfill installs the fetch() function
+	// on the global object (window or self)
+	//
+	// Return that as the export for use in Webpack, Browserify etc.
+	__webpack_require__(240);
+	module.exports = self.fetch.bind(self);
+
+
+/***/ },
+/* 240 */
+/***/ function(module, exports) {
+
+	(function(self) {
+	  'use strict';
+
+	  if (self.fetch) {
+	    return
+	  }
+
+	  function normalizeName(name) {
+	    if (typeof name !== 'string') {
+	      name = String(name)
+	    }
+	    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
+	      throw new TypeError('Invalid character in header field name')
+	    }
+	    return name.toLowerCase()
+	  }
+
+	  function normalizeValue(value) {
+	    if (typeof value !== 'string') {
+	      value = String(value)
+	    }
+	    return value
+	  }
+
+	  function Headers(headers) {
+	    this.map = {}
+
+	    if (headers instanceof Headers) {
+	      headers.forEach(function(value, name) {
+	        this.append(name, value)
+	      }, this)
+
+	    } else if (headers) {
+	      Object.getOwnPropertyNames(headers).forEach(function(name) {
+	        this.append(name, headers[name])
+	      }, this)
+	    }
+	  }
+
+	  Headers.prototype.append = function(name, value) {
+	    name = normalizeName(name)
+	    value = normalizeValue(value)
+	    var list = this.map[name]
+	    if (!list) {
+	      list = []
+	      this.map[name] = list
+	    }
+	    list.push(value)
+	  }
+
+	  Headers.prototype['delete'] = function(name) {
+	    delete this.map[normalizeName(name)]
+	  }
+
+	  Headers.prototype.get = function(name) {
+	    var values = this.map[normalizeName(name)]
+	    return values ? values[0] : null
+	  }
+
+	  Headers.prototype.getAll = function(name) {
+	    return this.map[normalizeName(name)] || []
+	  }
+
+	  Headers.prototype.has = function(name) {
+	    return this.map.hasOwnProperty(normalizeName(name))
+	  }
+
+	  Headers.prototype.set = function(name, value) {
+	    this.map[normalizeName(name)] = [normalizeValue(value)]
+	  }
+
+	  Headers.prototype.forEach = function(callback, thisArg) {
+	    Object.getOwnPropertyNames(this.map).forEach(function(name) {
+	      this.map[name].forEach(function(value) {
+	        callback.call(thisArg, value, name, this)
+	      }, this)
+	    }, this)
+	  }
+
+	  function consumed(body) {
+	    if (body.bodyUsed) {
+	      return Promise.reject(new TypeError('Already read'))
+	    }
+	    body.bodyUsed = true
+	  }
+
+	  function fileReaderReady(reader) {
+	    return new Promise(function(resolve, reject) {
+	      reader.onload = function() {
+	        resolve(reader.result)
+	      }
+	      reader.onerror = function() {
+	        reject(reader.error)
+	      }
+	    })
+	  }
+
+	  function readBlobAsArrayBuffer(blob) {
+	    var reader = new FileReader()
+	    reader.readAsArrayBuffer(blob)
+	    return fileReaderReady(reader)
+	  }
+
+	  function readBlobAsText(blob) {
+	    var reader = new FileReader()
+	    reader.readAsText(blob)
+	    return fileReaderReady(reader)
+	  }
+
+	  var support = {
+	    blob: 'FileReader' in self && 'Blob' in self && (function() {
+	      try {
+	        new Blob();
+	        return true
+	      } catch(e) {
+	        return false
+	      }
+	    })(),
+	    formData: 'FormData' in self,
+	    arrayBuffer: 'ArrayBuffer' in self
+	  }
+
+	  function Body() {
+	    this.bodyUsed = false
+
+
+	    this._initBody = function(body) {
+	      this._bodyInit = body
+	      if (typeof body === 'string') {
+	        this._bodyText = body
+	      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+	        this._bodyBlob = body
+	      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+	        this._bodyFormData = body
+	      } else if (!body) {
+	        this._bodyText = ''
+	      } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {
+	        // Only support ArrayBuffers for POST method.
+	        // Receiving ArrayBuffers happens via Blobs, instead.
+	      } else {
+	        throw new Error('unsupported BodyInit type')
+	      }
+
+	      if (!this.headers.get('content-type')) {
+	        if (typeof body === 'string') {
+	          this.headers.set('content-type', 'text/plain;charset=UTF-8')
+	        } else if (this._bodyBlob && this._bodyBlob.type) {
+	          this.headers.set('content-type', this._bodyBlob.type)
+	        }
+	      }
+	    }
+
+	    if (support.blob) {
+	      this.blob = function() {
+	        var rejected = consumed(this)
+	        if (rejected) {
+	          return rejected
+	        }
+
+	        if (this._bodyBlob) {
+	          return Promise.resolve(this._bodyBlob)
+	        } else if (this._bodyFormData) {
+	          throw new Error('could not read FormData body as blob')
+	        } else {
+	          return Promise.resolve(new Blob([this._bodyText]))
+	        }
+	      }
+
+	      this.arrayBuffer = function() {
+	        return this.blob().then(readBlobAsArrayBuffer)
+	      }
+
+	      this.text = function() {
+	        var rejected = consumed(this)
+	        if (rejected) {
+	          return rejected
+	        }
+
+	        if (this._bodyBlob) {
+	          return readBlobAsText(this._bodyBlob)
+	        } else if (this._bodyFormData) {
+	          throw new Error('could not read FormData body as text')
+	        } else {
+	          return Promise.resolve(this._bodyText)
+	        }
+	      }
+	    } else {
+	      this.text = function() {
+	        var rejected = consumed(this)
+	        return rejected ? rejected : Promise.resolve(this._bodyText)
+	      }
+	    }
+
+	    if (support.formData) {
+	      this.formData = function() {
+	        return this.text().then(decode)
+	      }
+	    }
+
+	    this.json = function() {
+	      return this.text().then(JSON.parse)
+	    }
+
+	    return this
+	  }
+
+	  // HTTP methods whose capitalization should be normalized
+	  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
+
+	  function normalizeMethod(method) {
+	    var upcased = method.toUpperCase()
+	    return (methods.indexOf(upcased) > -1) ? upcased : method
+	  }
+
+	  function Request(input, options) {
+	    options = options || {}
+	    var body = options.body
+	    if (Request.prototype.isPrototypeOf(input)) {
+	      if (input.bodyUsed) {
+	        throw new TypeError('Already read')
+	      }
+	      this.url = input.url
+	      this.credentials = input.credentials
+	      if (!options.headers) {
+	        this.headers = new Headers(input.headers)
+	      }
+	      this.method = input.method
+	      this.mode = input.mode
+	      if (!body) {
+	        body = input._bodyInit
+	        input.bodyUsed = true
+	      }
+	    } else {
+	      this.url = input
+	    }
+
+	    this.credentials = options.credentials || this.credentials || 'omit'
+	    if (options.headers || !this.headers) {
+	      this.headers = new Headers(options.headers)
+	    }
+	    this.method = normalizeMethod(options.method || this.method || 'GET')
+	    this.mode = options.mode || this.mode || null
+	    this.referrer = null
+
+	    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
+	      throw new TypeError('Body not allowed for GET or HEAD requests')
+	    }
+	    this._initBody(body)
+	  }
+
+	  Request.prototype.clone = function() {
+	    return new Request(this)
+	  }
+
+	  function decode(body) {
+	    var form = new FormData()
+	    body.trim().split('&').forEach(function(bytes) {
+	      if (bytes) {
+	        var split = bytes.split('=')
+	        var name = split.shift().replace(/\+/g, ' ')
+	        var value = split.join('=').replace(/\+/g, ' ')
+	        form.append(decodeURIComponent(name), decodeURIComponent(value))
+	      }
+	    })
+	    return form
+	  }
+
+	  function headers(xhr) {
+	    var head = new Headers()
+	    var pairs = xhr.getAllResponseHeaders().trim().split('\n')
+	    pairs.forEach(function(header) {
+	      var split = header.trim().split(':')
+	      var key = split.shift().trim()
+	      var value = split.join(':').trim()
+	      head.append(key, value)
+	    })
+	    return head
+	  }
+
+	  Body.call(Request.prototype)
+
+	  function Response(bodyInit, options) {
+	    if (!options) {
+	      options = {}
+	    }
+
+	    this.type = 'default'
+	    this.status = options.status
+	    this.ok = this.status >= 200 && this.status < 300
+	    this.statusText = options.statusText
+	    this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers)
+	    this.url = options.url || ''
+	    this._initBody(bodyInit)
+	  }
+
+	  Body.call(Response.prototype)
+
+	  Response.prototype.clone = function() {
+	    return new Response(this._bodyInit, {
+	      status: this.status,
+	      statusText: this.statusText,
+	      headers: new Headers(this.headers),
+	      url: this.url
+	    })
+	  }
+
+	  Response.error = function() {
+	    var response = new Response(null, {status: 0, statusText: ''})
+	    response.type = 'error'
+	    return response
+	  }
+
+	  var redirectStatuses = [301, 302, 303, 307, 308]
+
+	  Response.redirect = function(url, status) {
+	    if (redirectStatuses.indexOf(status) === -1) {
+	      throw new RangeError('Invalid status code')
+	    }
+
+	    return new Response(null, {status: status, headers: {location: url}})
+	  }
+
+	  self.Headers = Headers;
+	  self.Request = Request;
+	  self.Response = Response;
+
+	  self.fetch = function(input, init) {
+	    return new Promise(function(resolve, reject) {
+	      var request
+	      if (Request.prototype.isPrototypeOf(input) && !init) {
+	        request = input
+	      } else {
+	        request = new Request(input, init)
+	      }
+
+	      var xhr = new XMLHttpRequest()
+
+	      function responseURL() {
+	        if ('responseURL' in xhr) {
+	          return xhr.responseURL
+	        }
+
+	        // Avoid security warnings on getResponseHeader when not allowed by CORS
+	        if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
+	          return xhr.getResponseHeader('X-Request-URL')
+	        }
+
+	        return;
+	      }
+
+	      xhr.onload = function() {
+	        var status = (xhr.status === 1223) ? 204 : xhr.status
+	        if (status < 100 || status > 599) {
+	          reject(new TypeError('Network request failed'))
+	          return
+	        }
+	        var options = {
+	          status: status,
+	          statusText: xhr.statusText,
+	          headers: headers(xhr),
+	          url: responseURL()
+	        }
+	        var body = 'response' in xhr ? xhr.response : xhr.responseText;
+	        resolve(new Response(body, options))
+	      }
+
+	      xhr.onerror = function() {
+	        reject(new TypeError('Network request failed'))
+	      }
+
+	      xhr.open(request.method, request.url, true)
+
+	      if (request.credentials === 'include') {
+	        xhr.withCredentials = true
+	      }
+
+	      if ('responseType' in xhr && support.blob) {
+	        xhr.responseType = 'blob'
+	      }
+
+	      request.headers.forEach(function(value, name) {
+	        xhr.setRequestHeader(name, value)
+	      })
+
+	      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
+	    })
+	  }
+	  self.fetch.polyfill = true
+	})(typeof self !== 'undefined' ? self : this);
+
+
+/***/ },
+/* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -26593,7 +27026,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Profile.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 240 */
+/* 242 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -26618,180 +27051,153 @@
 
 	var React = __webpack_require__(1);
 
-	var HeaderMenu = React.createClass({
-	    displayName: 'HeaderMenu',
+	var Header = React.createClass({
+	    displayName: 'Header',
 
+	    getInitialState: function getInitialState() {
+	        return { open: false };
+	    },
+	    Click: function Click() {
+	        this.setState({ open: !this.state.open });
+	    },
 	    render: function render() {
 	        var action = (0, _redux.bindActionCreators)(Actions, this.props.dispatch);
+	        var panel = React.createElement(
+	            'div',
+	            { className: 'LeftBtnPanel' },
+	            React.createElement(
+	                _reactRouter.Link,
+	                { to: 'signin' },
+	                React.createElement(
+	                    'div',
+	                    { className: 'MenuRightBtn' },
+	                    'sigup'
+	                )
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: 'MenuRightBtn',
+	                    onClick: this.Click
+	                },
+	                'sigin'
+	            ),
+	            React.createElement(
+	                _reactRouter.Link,
+	                { to: '/' + this.props.userData.username },
+	                React.createElement(
+	                    'div',
+	                    { className: 'MenuRightBtn' },
+	                    this.props.userData.username
+	                )
+	            )
+	        );
 	        return React.createElement(
 	            'div',
 	            null,
 	            React.createElement(
 	                'div',
-	                { className: 'PanelForMenu' },
+	                { className: 'Nav' },
 	                React.createElement(
 	                    'div',
-	                    { className: 'Menu' },
+	                    { className: 'Menu RowFlex' },
 	                    React.createElement(
-	                        'div',
-	                        null,
+	                        _reactRouter.Link,
+	                        { to: '/' },
 	                        React.createElement(
-	                            _reactRouter.Link,
-	                            { to: '/' },
-	                            React.createElement('img', { className: 'Image ImgStyleM',
-	                                src: 'https://lh6.googleusercontent.com/-IzoUthdKiYA/Vull4PO5fXI/AAAAAAAAAA4/zDoB0OTDEg4sO06rl02kuvvFuENEq9_-Q/s256-p/logo.png' })
+	                            'div',
+	                            { className: 'MenuLeftBtn MenuBtn' },
+	                            'JobBox'
 	                        )
 	                    ),
 	                    React.createElement(
 	                        'div',
-	                        { className: 'DFlex' },
-	                        React.createElement(
-	                            'i',
-	                            { className: 'Icon IconStyleM' },
-	                            'search'
-	                        ),
-	                        React.createElement(
-	                            'i',
-	                            { className: 'Icon IconStyleM' },
-	                            'mail'
-	                        ),
-	                        React.createElement(Login, { userData: { name: this.props.userData.name, username: this.props.userData.username }
-	                            //logInClick={data=>this.props.dispatch(login(data))}/>
-	                            , logInClick: function logInClick(data) {
-	                                return action.login(data);
-	                            } })
-	                    )
+	                        { className: 'MenuRightBtn' },
+	                        'Search'
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { className: 'MenuRightBtn' },
+	                        'Message'
+	                    ),
+	                    panel
 	                )
 	            ),
+	            React.createElement(LoginPanel, { open: this.state.open, logInClick: function logInClick(data) {
+	                    return action.login(data);
+	                } }),
 	            this.props.children
 	        );
 	    }
 	});
-	var Login = React.createClass({
-	    displayName: 'Login',
+
+	var LoginPanel = React.createClass({
+	    displayName: 'LoginPanel',
 
 	    onLogInClick: function onLogInClick() {
 	        var name = this.refs.username.value;
 	        var password = this.refs.password.value;
+	        if (name && password !== '') {
+	            this.props.logInClick({ username: name, password: password });
+	        }
 	        this.refs.password.value = '';
 	        this.refs.username.value = '';
-	        this.props.logInClick({ username: name, password: password });
 	    },
 	    render: function render() {
-	        var login;
-	        if (this.props.userData.username == null) {
-	            login = React.createElement(
-	                'ul',
-	                { className: 'menu' },
+	        if (this.props.open) {
+	            return React.createElement(
+	                'div',
+	                { className: 'RowFlex SignColore' },
 	                React.createElement(
-	                    'li',
+	                    'div',
 	                    null,
 	                    React.createElement(
-	                        'button',
-	                        { className: 'Button BtnStyleM menu' },
-	                        'Sign'
-	                    ),
-	                    React.createElement(
-	                        'ul',
-	                        null,
+	                        'div',
+	                        { className: 'PaddingSignIn' },
 	                        React.createElement(
-	                            'li',
-	                            null,
-	                            React.createElement(
-	                                'a',
-	                                { className: 'RowBetween' },
-	                                React.createElement(
-	                                    'div',
-	                                    { className: 'TextStyleM' },
-	                                    'Username'
-	                                ),
-	                                React.createElement(
-	                                    'div',
-	                                    null,
-	                                    React.createElement('input', { tute: 'text', ref: 'username', className: 'Label InputStyleM' })
-	                                )
-	                            )
+	                            'div',
+	                            { className: 'SignInTextRight' },
+	                            'USERNAME'
 	                        ),
 	                        React.createElement(
-	                            'li',
+	                            'div',
 	                            null,
-	                            React.createElement(
-	                                'a',
-	                                { className: 'RowBetween' },
-	                                React.createElement(
-	                                    'div',
-	                                    { className: 'TextStyleM' },
-	                                    'Password'
-	                                ),
-	                                React.createElement(
-	                                    'div',
-	                                    null,
-	                                    React.createElement('input', { tute: 'text', ref: 'password', className: 'Label InputStyleM' })
-	                                )
-	                            )
+	                            React.createElement('input', { className: 'SignInput', type: 'text', ref: 'username', placeholder: 'Write...' })
 	                        ),
 	                        React.createElement(
-	                            'li',
+	                            'div',
+	                            { className: 'SignInTextRight' },
+	                            'PASSWORD'
+	                        ),
+	                        React.createElement(
+	                            'div',
 	                            null,
-	                            React.createElement(
-	                                'button',
-	                                { className: 'Button Sign WhiteBtn', onClick: this.onLogInClick },
-	                                'Sign in'
-	                            ),
-	                            React.createElement(
-	                                'div',
-	                                { className: 'TextStyleM' },
-	                                'or'
-	                            ),
-	                            React.createElement(
-	                                _reactRouter.Link,
-	                                { to: '/signin' },
-	                                React.createElement(
-	                                    'button',
-	                                    { className: 'Button Sign GreenBtn' },
-	                                    'Sign up'
-	                                )
-	                            )
+	                            React.createElement('input', { className: 'SignInput', type: 'password', ref: 'password', placeholder: 'Write...' })
+	                        ),
+	                        React.createElement(
+	                            'button',
+	                            { className: 'SignBtton SignInButton',
+	                                onClick: this.onLogInClick
+	                            },
+	                            'Sign in'
 	                        )
 	                    )
 	                )
 	            );
 	        } else {
-	            login = React.createElement(
-	                _reactRouter.Link,
-	                { to: "/" + this.props.userData.username },
-	                React.createElement(
-	                    'div',
-	                    { className: 'Hover' },
-	                    React.createElement(
-	                        'span',
-	                        { className: 'MenuTextName' },
-	                        this.props.userData.name || this.props.userData.username
-	                    ),
-	                    React.createElement('img', { className: 'LolImage Square Circle',
-	                        src: 'https://lh3.googleusercontent.com/-2ISHLNjuIts/Vull4KcLT-I/AAAAAAAAAA8/iC8vzN3ycTU8McfvZzA5iZ700Sezpddiw/w595-h334-no/Non.png',
-	                        alt: 'Avatar' })
-	                )
-	            );
+	            return null;
 	        }
-	        return React.createElement(
-	            'div',
-	            null,
-	            login
-	        );
 	    }
 	});
-
 	exports.default = (0, _reactRedux.connect)(function (state) {
 	    return {
 	        userData: state.userData
 	    };
-	})(HeaderMenu);
+	})(Header);
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "HeaderMenu.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 241 */
+/* 243 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -26848,16 +27254,26 @@
 	var Inputs = React.createClass({
 	    displayName: 'Inputs',
 
+	    getInitialState: function getInitialState() {
+	        return { err: null };
+	    },
 	    GetValues: function GetValues() {
 	        var name = this.refs.username.value;
 	        var mail = this.refs.email.value;
-	        var password = this.refs.password.value;
-	        this.props.registrData({ username: name, mail: mail, password: password });
+	        if (this.refs.password.value == this.refs.password2.value) {
+	            var password = this.refs.password.value;
+	            this.props.registrData({ username: name, mail: mail, password: password });
+	        } else {
+	            this.setState({ err: 'пароли не совпадают' });
+	        }
+
 	        this.refs.password.value = '';
 	        this.refs.email.value = '';
 	        this.refs.username.value = '';
 	    },
 	    render: function render() {
+	        var _this2 = this;
+
 	        return React.createElement(
 	            'div',
 	            null,
@@ -26873,20 +27289,31 @@
 	            ),
 	            React.createElement(
 	                'div',
+	                { style: { backgroundColor: 'red' },
+	                    onClick: function onClick() {
+	                        _this2.setState({ err: null });
+	                    }
+	                },
+	                this.state.err
+	            ),
+	            React.createElement(
+	                'div',
 	                null,
 	                React.createElement('input', { className: 'InputReg', type: 'password', ref: 'password', placeholder: 'Create a password' })
 	            ),
 	            React.createElement(
 	                'div',
 	                null,
+	                React.createElement('input', { className: 'InputReg', type: 'password', ref: 'password2', placeholder: 'Confirm a password' })
+	            ),
+	            React.createElement(
+	                'div',
+	                null,
 	                React.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/' },
-	                    React.createElement(
-	                        'button',
-	                        { onClick: this.GetValues, className: 'BtnReg' },
-	                        'Sign up for JobBox'
-	                    )
+	                    'button',
+	                    { onClick: this.GetValues,
+	                        className: 'BtnReg' },
+	                    'Sign up for JobBox'
 	                )
 	            )
 	        );
@@ -26905,7 +27332,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Registration.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 242 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -26920,19 +27347,36 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRedux = __webpack_require__(159);
+
+	var _actions = __webpack_require__(238);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Test = _react2.default.createClass({
-	    displayName: 'Test',
+	var Settings = _react2.default.createClass({
+	    displayName: 'Settings',
 
-	    getInitialState: function getInitialState() {
-	        return { username: '', password: '' };
-	    },
 	    usernameChange: function usernameChange(event) {
 	        this.setState({ username: event.target.value });
 	    },
 	    Click: function Click() {
-	        this.setState({ password: event.target.value });
+	        var name = this.refs.name.value;
+	        var mail = this.refs.mail.value;
+	        var phone = this.refs.phone.value;
+	        var description = this.refs.description.value;
+	        var user = this.props.userData;
+	        var data = {
+	            _id: user.id,
+	            username: user.username,
+	            password: user.password,
+	            name: name || user.name,
+	            description: description || user.description,
+	            contact: {
+	                mail: mail || user.contact.mail,
+	                phone: phone || user.contact.phone
+	            }
+	        };
+	        this.props.dispatch((0, _actions.saveChanges)(data));
 	    },
 	    render: function render() {
 	        return _react2.default.createElement(
@@ -26956,10 +27400,10 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'i',
-	                        { className: 'material-icons' },
+	                        { className: 'Icon small' },
 	                        'assignment_ind'
 	                    ),
-	                    _react2.default.createElement('input', { className: 'SettingInput', type: 'text', placeholder: 'Name...' })
+	                    _react2.default.createElement('input', { className: 'SettingInput', ref: 'name', type: 'text', placeholder: 'Name...' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -26971,10 +27415,10 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'i',
-	                        { className: 'material-icons' },
+	                        { className: 'Icon small' },
 	                        'mail'
 	                    ),
-	                    _react2.default.createElement('input', { className: 'SettingInput', type: 'text', placeholder: 'Mail...' })
+	                    _react2.default.createElement('input', { className: 'SettingInput', type: 'text', ref: 'mail', placeholder: 'Mail...' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -26986,10 +27430,10 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'i',
-	                        { className: 'material-icons' },
+	                        { className: 'Icon small' },
 	                        'call'
 	                    ),
-	                    _react2.default.createElement('input', { className: 'SettingInput', type: 'text', placeholder: 'Number phone...' })
+	                    _react2.default.createElement('input', { className: 'SettingInput', type: 'text', ref: 'phone', placeholder: 'Number phone...' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
@@ -27025,17 +27469,23 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'i',
-	                        { className: 'material-icons' },
+	                        { className: 'Icon small' },
 	                        'info_outline'
 	                    ),
-	                    _react2.default.createElement('textarea', { className: 'SettingTextarea', type: 'text', placeholder: 'Information about your company or yourself...' })
+	                    _react2.default.createElement('textarea', { className: 'SettingTextarea',
+	                        type: 'text',
+	                        placeholder: 'Information about your company or yourself...',
+	                        ref: 'description'
+	                    })
 	                ),
 	                _react2.default.createElement(
 	                    'button',
-	                    { className: 'SettingBtn' },
+	                    { className: 'SettingBtn',
+	                        onClick: this.Click
+	                    },
 	                    _react2.default.createElement(
 	                        'i',
-	                        { className: 'material-icons', title: 'Save' },
+	                        { className: 'Icon small', title: 'Save' },
 	                        'save'
 	                    ),
 	                    'save'
@@ -27044,12 +27494,16 @@
 	        );
 	    }
 	});
-	exports.default = Test;
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	    return {
+	        userData: state.userData
+	    };
+	})(Settings);
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Settings.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 243 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -27062,19 +27516,19 @@
 
 	var _redux = __webpack_require__(165);
 
-	var _reducers = __webpack_require__(244);
+	var _reducers = __webpack_require__(246);
 
 	var reducers = _interopRequireWildcard(_reducers);
 
-	var _reduxLogger = __webpack_require__(246);
+	var _reduxLogger = __webpack_require__(248);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	var _getData = __webpack_require__(247);
+	var _getData = __webpack_require__(249);
 
 	var _getData2 = _interopRequireDefault(_getData);
 
-	var _sendData = __webpack_require__(248);
+	var _sendData = __webpack_require__(250);
 
 	var _sendData2 = _interopRequireDefault(_sendData);
 
@@ -27105,7 +27559,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "state.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 244 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -27119,7 +27573,7 @@
 	exports.posts = posts;
 	exports.Profile = Profile;
 
-	var _user = __webpack_require__(245);
+	var _user = __webpack_require__(247);
 
 	var _user2 = _interopRequireDefault(_user);
 
@@ -27157,13 +27611,13 @@
 
 	    switch (action.type) {
 	        case 'LOAD_USER_SUCCESS':
+	            console.log(action);
 	            return Object.assign({}, state, {
-	                username: action.data[11].username,
-	                id: action.data[11]._id,
+	                username: action.data.username,
 	                type: 'user',
-	                description: 'Предпринимательство, предпринимательская деятельность — экономическая деятельность' + ', направленная на систематическое получение прибыли от производства и продажи товаров, оказания ' + 'услуг. Для этой цели используется имущество, нематериальные активы, труд как самого' + ' предпринимателя, так и привлечённые со стороны. Нет гарантий, что затраченные средства окупятся,' + ' что произведённое будет продано с прибылью. С этим связан риск потерь всего или части имущества.',
+	                description: action.data.description || 'Тут пока что пусто',
 	                contact: Object.assign(state.contact, {
-	                    mail: action.data[11].mail
+	                    mail: action.data.mail
 	                })
 	            });
 	        default:
@@ -27176,7 +27630,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 245 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -27200,13 +27654,16 @@
 	                    mail: action.impotantData.mail
 	                })
 	            });
-	        case 'SEND_SUCCESS':
+	        case 'SEND_LOGIN_DATA_SUCCESS':
 	            return Object.assign({}, state, {
+	                id: action.data._id,
 	                username: action.data.username,
 	                type: 'user',
 	                contact: Object.assign(state.contact, {
 	                    mail: action.data.mail
-	                })
+	                }),
+	                authorization: true
+
 	            });
 
 	        case 'REGISTRATION':
@@ -27254,7 +27711,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "user.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 246 */
+/* 248 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27487,7 +27944,7 @@
 	module.exports = createLogger;
 
 /***/ },
-/* 247 */
+/* 249 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -27540,7 +27997,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "getData.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 248 */
+/* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -27556,6 +28013,18 @@
 	var sendData = function sendData(store) {
 	    return function (next) {
 	        return function (action) {
+	            //    if (action.type !== 'SEND'){
+	            //        return next(action)
+	            //    }
+	            //    const [startAction, successAction, failAction]= action.actions;
+	            //    store.dispatch({
+	            //        type: startAction
+	            //    });
+	            //    store.dispatch({
+	            //        type: successAction,
+	            //        data: action.data
+	            //    })
+	            //};
 	            if (action.type !== 'SEND') {
 	                return next(action);
 	            }
@@ -27569,9 +28038,17 @@
 	            store.dispatch({
 	                type: startAction
 	            });
-	            store.dispatch({
-	                type: successAction,
-	                data: action.data
+	            console.log(action.promise);
+	            action.promise.then(function (data) {
+	                return store.dispatch({
+	                    type: successAction,
+	                    data: data
+	                });
+	            }, function (error) {
+	                return store.dispatch({
+	                    type: failAction,
+	                    error: error
+	                });
 	            });
 	        };
 	    };
