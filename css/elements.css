@@ -1,0 +1,66 @@
+button {
+    color: #6F7276;
+    border: none;
+    outline: none;
+    background-color: hsl(0, 0%, 90%);
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+button.primary {
+    color: white;
+    background-color: #21BA45;
+}
+button.primary:hover {
+    background-color: hsla(135,70%,35%,1)
+}
+button:hover {
+    background-color: hsl(0, 0%, 85%);
+}
+input {
+  color: #6F7276;
+  font-size: 20px;
+  padding: 9px;
+  outline: none;
+  border: solid 2px #edeeee;
+  border-radius: 7px;
+  background-color: #fafafa;
+}
+input:focus {
+  color: black;
+  outline: none;
+  border: solid 2px #edeeee;
+  border-radius: 5px;
+  background-color: white;
+}
+textarea {
+  color: #6F7276;
+  font-size: 20px;
+  padding: 9px;
+  outline: none;
+  border-radius: 7px;
+  border: solid 2px #edeeee;
+  background-color: #fafafa;
+}
+textarea:focus {
+  color: black;
+  outline: none;
+  border: solid 2px #edeeee;
+  border-radius: 5px;
+  background-color: white;
+  resize: none;
+}
+img{
+    object-fit: cover;
+}
+a{
+  color: inherit;
+  text-decoration: inherit;
+}
+@font-face{
+    font-family: Ubuntu;
+    src: url(ubuntu/Ubuntu.ttf);
+}
+h1,h2,h3,h4,h5,h6{
+  margin: 5px;
+}

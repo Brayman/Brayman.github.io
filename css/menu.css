@@ -1,103 +1,19 @@
-/*!*M-Menu*!*/
-/*!*Image*!*/
-/*.ImgStyleM{*/
-  /*width: 2.5em;*/
-  /*height: 2.5em;*/
-  /*padding: 0.5em;*/
-  /*cursor: pointer;*/
-/*}*/
-/*.IconStyleM{*/
-  /*color:#ffffff;*/
-  /*font-size: 2.5em;*/
-  /*padding: 0.2em;*/
-  /*cursor: pointer;*/
-/*}*/
-/*.ImgStyleM:hover,.IconStyleM:hover,TextStyleM:hover{*/
-  /*background-color:#FF5022;*/
-/*}*/
-/*!*Menu block*!*/
-/*ul.menu {*/
-  /*margin:0em;*/
-  /*padding: 0em;*/
-  /*height: auto;*/
-  /*width: auto;*/
-/*}*/
-/*ul.menu li {*/
-  /*float: left;*/
-  /*list-style: none;*/
-/*}*/
-/*ul.menu li a {*/
-  /*color: #ffffff;*/
-  /*display: block;*/
-  /*padding:12px;*/
-  /*margin: 0px;*/
-  /*text-transform:none;*/
-  /*text-decoration: none;*/
-/*}*/
-/*ul.menu li ul {*/
-  /*display: none;*/
-  /*margin: 0em;*/
-  /*background: #767676 ;*/
-  /*padding: 0em;*/
-/*}*/
-/*ul.menu li:hover ul {*/
-  /*display: block;*/
-  /*position: absolute;*/
-  /*margin: 0em;*/
-  /*padding: 0em;*/
-  /*margin-left:-7em;*/
-/*}*/
-/*ul.menu ul li  {*/
-    /*padding: 0em;*/
-/*}*/
-/*!*Buttons*!*/
-/*.Sign{*/
-  /*margin: 0.2em 1em 0.2em;*/
-  /*width: 12em;*/
-  /*padding: 0.6em;*/
-/*}*/
-/*.BtnStyleM{*/
-  /*background-color: #FFFFFF;*/
-  /*color: #030303;*/
-  /*border: solid 2px #FFFFFF;*/
-  /*padding: 0.5em 1.5em;*/
-  /*margin: 0.9em 1em;*/
-  /*background-color: #FFFFFF;*/
-  /*color: #000000;*/
-  /*border: solid 2px #FFFFFF;*/
-/*}*/
-/*!*Input*!*/
-/*.InputStyleM{*/
-  /*padding: 0.4em;*/
-  /*border:solid 0.225em #E9E9E9;*/
-/*}*/
-/*!*Text*!*/
-/*.TextStyleM{*/
-  /*color:#ffffff;*/
-  /*cursor: default;*/
-  /*color: #ffffff;*/
-  /*font-weight:bolder;*/
-  /*cursor: default;*/
-  /*-moz-user-select: -moz-none;*/
-  /*-o-user-select: none;*/
-  /*-khtml-user-select: none;*/
-  /*-webkit-user-select: none;*/
-  /*user-select: none;*/
-/*}*/
-a{
-  color: inherit;
-  text-decoration: inherit;
-}
-body{
-  margin: 0em;
-  padding: 0em;
-  font-family: Ubuntu;
-  background-color: #F0F0F0;
+.TextHome{
+  text-align: center;
+  margin: 5px;
 }
 .Nav{
   height: 65px;
   margin: 0em;
   padding: 0em;
+}
+.Van{
+  position: fixed;
+  left: 0; bottom: 0; /* Левый нижний угол */
+  background: #37474f;
+  color: #fff;
+  width: 100%;
+  height: 65px;
 }
 .Menu{
   text-transform: uppercase;
@@ -107,9 +23,12 @@ body{
   height: 65px;
   background-color: #37474f;
   color: #ffffff;
+  position: fixed;
+  z-index: 1;
+  min-width: 450px;
 }
 .LeftBtnPanel{
-  display: flex;
+    display: flex;
 }
 .MenuLeftBtn{
   margin: 15px 0px 0px 0px;
@@ -121,9 +40,12 @@ body{
   -webkit-user-select: none;
   user-select: none;
 }
+.MenuLeftBtn:hover{
+  opacity: 0.4;
+}
 .MenuRightBtn{
   margin: 20px 0px 0px 0px;
-  padding: 15px 10px;
+  padding: 14px 10px;
   font-size: 15px;
   cursor: pointer;
   -moz-user-select: -moz-none;
@@ -156,7 +78,7 @@ body{
 .SignInTextDisription{
   text-align: center;
   font-size: 30px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   -moz-user-select: -moz-none;
   -o-user-select: none;
   -khtml-user-select: none;
@@ -166,7 +88,7 @@ body{
 }
 .SignInTextCompany{
   text-align: center;
-  font-size: 63px;
+  font-size: 67px;
   margin: 100px 0px 50px 0px;
   -moz-user-select: -moz-none;
   -o-user-select: none;
@@ -177,28 +99,24 @@ body{
 }
 .SignBtton{
   padding: 15px 20px;
-  margin: 20px 0px 100px 120px;
+  margin: 20px 0px 100px 160px;
   cursor: pointer;
   outline: none;
   font-size: 17px;
-  border-radius: 2px;
+  border-radius: 5px;
   border: solid 2px;
 }
 .SignInput{
-  width: 290px;
-  padding: 10px;
-  margin-bottom: 10px;
+  width: 400px;
   font-size: 20px;
-  border-radius: 5px;
-  outline: none;
-  border: solid 3px #3949AB;
-}
-.SignInput:focus{
-  border:solid 3px #4CAF50;
+  padding:10px 14px;
+  border-color: #37474F;
+  border-radius: 3px;
+  background-color: #ffffff;
 }
 .SignColore{
-  padding: 70px 0px;
-  background: #5c6bc0;
+  padding: 80px 0px;
+  background: #5C6BC0;
 }
 .SignInButton{
   background-color: #37474F;
@@ -206,14 +124,21 @@ body{
   color: #ffffff;
 }
 .SignUpButton{
-  background-color: #4DB6AC;
-  border-color: #4DB6AC;
+  background-color: #ffffff;
+  border-color: #37474F;
+  color:#37474F;
 }
 .SignUpButton:hover{
-  opacity: 0.6;
+  background-color: #37474F;
+  border-color: #37474F;
+  color:#ffffff;
+  opacity: 1;
 }
 .SignInButton:hover{
-  opacity: 0.8;
+  background-color: #ffffff;
+  border-color: #37474F;
+  color: #37474F;
+  opacity: 1;
 }
 .PanelInfo{
   font-size: 18px;
@@ -247,4 +172,191 @@ body{
 }
 .PaddingSignIn{
   padding: 100px 0px;
+}
+.MenuAvatar{
+  margin:12.5px 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  object-fit: cover;
+  vertical-align: middle;
+}
+.MenuName{
+  text-transform: none;
+  text-decoration: none;
+  font-size: 20px;
+}
+a.ManuName{
+  color: #5c6bc0;
+  outline: none;
+}
+a.MenuName:active,a.MenuName:focus{
+  color: #37474F;
+}
+.MenuButtonSignIn{
+  margin: 12.5px 10px 12.5px 30px;
+  padding: 10px;
+  cursor: pointer;
+  background: #5c6bc0;
+  color:#ffffff;
+  border:solid 2px #5c6bc0;
+}
+.MenuButtonSignIn:hover{
+  opacity: 0.6;
+}
+.MenuSignIn{
+  display: flex;
+}
+.MenuTextName{
+  margin-left: 30px;
+}
+.InputCheckBox{
+  width: 22px;
+  height: 22px;
+  vertical-align: middle;
+  padding: 0px;
+  margin:0px 5px 0px 0px;
+}
+.InputCheckBoxText{
+  text-align: center;
+  font-size: 17px;
+  color:#E9E9E9;
+  margin-left: 20px;
+}
+
+
+.TextAbout{
+  margin-top: -1px;
+  padding: 120px 0px 10px;
+  font-size: 40px;
+  width: 100%;
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+div.TextHistory:before, div.TextHistory:after {
+    content: "";
+    width: 70px;
+    height: 6px;
+    border-top: 1px solid #ffffff;
+    display: inline-block;
+    margin: 0 10px;
+}
+.TextHistory{
+  width: 100%;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+.TextHistoryDescription{
+    letter-spacing: 0.5px;
+    max-width: 600px;
+    margin: 30px auto;
+    line-height: 24px;
+    font-size: 15px;
+    padding: 0px 35px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+.ColorAbout{
+  color:#ffffff;
+  background-color: #37474f;
+  margin-top: -2px;
+}
+.TextTeam{
+    margin: 30px auto 0px;
+    width: 200px;
+    text-align: center;
+    padding: 10px 0px;
+    font-size: 22px;
+    border-bottom: 1px solid #CECECE;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+.PanelAbout{
+  text-align: center;
+  margin: 30px 0px;
+  flex-wrap: wrap;
+}
+.ButtonAbout{
+  padding: 20px;
+  width: 220px;
+  margin: 5px 10px;
+  font-size: 20px;
+  border: solid 0.5px #37474F;
+  background: none;
+  cursor: pointer;
+  color: #37474F;
+  outline:none;
+}
+.ButtonAbout:hover,.ButtonAbout:focus{
+  background: #37474F;
+  color:#ffffff;
+}
+.AboutWorker{
+  text-align:center;
+  margin: 50px 0px 120px;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+.ImgAbout{
+  border-radius: 50%;
+  margin: 12px 0px 5px;
+  object-fit: cover;
+}
+.AboutMargin{
+  margin: 20px 60px;
+}
+.SelectionSign{
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  display: flex;
+  z-index: 1;
+}
+.ButtonSelection{
+  width: 100%;
+  height: 70px;
+  font-size: 30px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  z-index: 2;
+  border: solid 1px #37474F;
+  color: #37474F;
+  margin: 5px;
+}
+.ButtonSelection:hover{
+  border: solid 1px #37474F;
+  background: #37474F;
+  color: #ffffff;
+}
+.BlockSelectionSign{
+  display:flex;
+  width: 99%;
 }
