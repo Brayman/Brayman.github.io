@@ -60,7 +60,9 @@
 
 	var _reactRouter = __webpack_require__(181);
 
-	var _HomePage = __webpack_require__(239);
+	var _actions = __webpack_require__(239);
+
+	var _HomePage = __webpack_require__(242);
 
 	var _HomePage2 = _interopRequireDefault(_HomePage);
 
@@ -72,27 +74,27 @@
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Registration = __webpack_require__(250);
+	var _Registration = __webpack_require__(252);
 
 	var _Registration2 = _interopRequireDefault(_Registration);
 
-	var _SignIn = __webpack_require__(251);
+	var _SignIn = __webpack_require__(255);
 
 	var _SignIn2 = _interopRequireDefault(_SignIn);
 
-	var _Settings = __webpack_require__(252);
+	var _Settings = __webpack_require__(258);
 
 	var _Settings2 = _interopRequireDefault(_Settings);
 
-	var _Search = __webpack_require__(253);
+	var _Search = __webpack_require__(261);
 
 	var _Search2 = _interopRequireDefault(_Search);
 
-	var _state = __webpack_require__(254);
+	var _state = __webpack_require__(264);
 
 	var _state2 = _interopRequireDefault(_state);
 
-	var _About = __webpack_require__(259);
+	var _About = __webpack_require__(270);
 
 	var _About2 = _interopRequireDefault(_About);
 
@@ -26568,183 +26570,9 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _ListInfo = __webpack_require__(240);
-
-	var _ListInfo2 = _interopRequireDefault(_ListInfo);
-
-	var _actions = __webpack_require__(241);
-
-	var _reactRedux = __webpack_require__(159);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var HomePage = _react2.default.createClass({
-	    displayName: 'HomePage',
-	    componentWillMount: function componentWillMount() {
-	        this.props.dispatch((0, _actions.getPost)());
-	        this.props.dispatch((0, _actions.getCompanys)());
-	    },
-
-
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'NewsColumn' },
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'Post' },
-	                    _react2.default.createElement(
-	                        'h2',
-	                        { className: 'TextHome' },
-	                        'Users'
-	                    ),
-	                    _react2.default.createElement(NewsColumn, { posts: this.props.posts })
-	                )
-	            )
-	        );
-	    }
-	});
-	var NewsColumn = _react2.default.createClass({
-	    displayName: 'NewsColumn',
-
-	    render: function render() {
-	        var post = this.props.posts;
-	        return _react2.default.createElement(
-	            'div',
-	            null,
-	            post.map(function (post) {
-	                return _react2.default.createElement(_ListInfo2.default, { key: post._id, data: post });
-	            })
-	        );
-	    }
-	});
-	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return {
-	        status: state.status,
-	        companys: state.companys,
-	        posts: state.posts,
-	        color: state.color
-	    };
-	})(HomePage);
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "HomePage.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 240 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _reactRouter = __webpack_require__(181);
-
-	var React = __webpack_require__(1);
-
-	var ListInfo = React.createClass({
-	    displayName: 'ListInfo',
-
-	    goTo: function goTo() {
-	        _reactRouter.browserHistory.push('/' + this.props.data._id);
-	    },
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            { className: 'card' },
-	            React.createElement(
-	                'header',
-	                { className: 'card-header' },
-	                React.createElement(
-	                    'h3',
-	                    { className: 'NameText' },
-	                    React.createElement(
-	                        _reactRouter.Link,
-	                        { to: '/' + this.props.data._id },
-	                        this.props.data.name || this.props.data.login
-	                    )
-	                )
-	            ),
-	            React.createElement(
-	                'div',
-	                { className: 'card-body' },
-	                React.createElement(
-	                    'div',
-	                    { className: 'card-info1' },
-	                    this.props.data.description
-	                ),
-	                React.createElement(
-	                    'div',
-	                    { className: 'card-info1' },
-	                    React.createElement(
-	                        'h4',
-	                        null,
-	                        'Contacts:'
-	                    ),
-	                    this.props.data.contacts ? React.createElement(
-	                        'div',
-	                        null,
-	                        React.createElement('i', { className: 'phone icon' }),
-	                        this.props.data.contacts.phone
-	                    ) : null,
-	                    this.props.data.contacts ? React.createElement(
-	                        'div',
-	                        null,
-	                        React.createElement('i', { className: 'at icon' }),
-	                        this.props.data.contacts.mail
-	                    ) : null,
-	                    this.props.data.location ? React.createElement(
-	                        'div',
-	                        null,
-	                        React.createElement('i', { className: 'marker icon' }),
-	                        this.props.data.location
-	                    ) : null
-	                ),
-	                React.createElement(
-	                    'div',
-	                    { className: 'card-image' },
-	                    React.createElement('img', { className: 'card-image',
-	                        src: this.props.data.picture,
-	                        width: '150px', height: '150px' }),
-	                    React.createElement(
-	                        'button',
-	                        { className: 'primary card-button',
-	                            onClick: this.goTo
-	                        },
-	                        'view profile'
-	                    )
-	                )
-	            )
-	        );
-	    }
-	});
-	exports.default = ListInfo;
-
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "ListInfo.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 241 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
+	exports.routeAction = routeAction;
 	exports.requestAction = requestAction;
+	exports.redirectAction = redirectAction;
 	exports.getPost = getPost;
 	exports.registration = registration;
 	exports.login = login;
@@ -26754,16 +26582,34 @@
 	exports.signout = signout;
 	exports.getCompanys = getCompanys;
 	exports.search = search;
+	exports.openSearch = openSearch;
 
-	var _isomorphicFetch = __webpack_require__(242);
+	var _reactRouter = __webpack_require__(181);
+
+	var _isomorphicFetch = __webpack_require__(240);
 
 	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var url = 'https://gentle-meadow-48046.herokuapp.com/';
-	//const url = 'http://10.26.11.88/';
+	// const url = 'https://gentle-meadow-48046.herokuapp.com/';
+	var url = 'http://10.26.11.88/';
+	function routeAction(actions, url, promise) {
+	    return {
+	        type: 'ROUTING',
+	        actions: actions,
+	        url: url,
+	        promise: promise
+	    };
+	}
 	function requestAction(actions, promise) {
+	    return {
+	        type: 'REQUEST',
+	        actions: actions,
+	        promise: promise
+	    };
+	}
+	function redirectAction(actions, promise) {
 	    return {
 	        type: 'REQUEST',
 	        actions: actions,
@@ -26781,13 +26627,13 @@
 	    return requestAction(['LOGIN', 'LOGIN_SUCCESS', 'LOGIN_FAILURE'], loginReq(data));
 	}
 	function getProfileData(user) {
-	    return requestAction(['LOAD_USER', 'LOAD_USER_SUCCESS', 'LOAD_USER_FAILURE'], loadProfile(user));
+	    return routeAction(['OPEN_PROFILE', 'LOAD_PROFILE_SUCCESS', 'LOAD_PROFILE_FAILURE'], '/' + user, loadProfile(user));
 	}
 	function InitialUser(user) {
 	    return requestAction(['LOGIN', 'LOGIN_SUCCESS', 'LOGIN_FAILURE'], initialUser(user));
 	}
 	function saveChanges(changes) {
-	    return requestAction(['SAVE_USER', 'SAVE_USER_SUCCESS', 'SAVE_USER_FAILURE'], newChanges(changes));
+	    return requestAction(['SAVE_SETTINGS', 'SAVE_SETTINGS_SUCCESS', 'SAVE_SETTINGS_FAILURE'], newChanges(changes));
 	}
 	function signout() {
 	    return requestAction(['SIGNOUT', 'SIGNOUT_SUCCESS', 'SIGNOUT_FAILURE'], signoutReq());
@@ -26844,25 +26690,31 @@
 	    return req(url + 'users/' + user);
 	}
 	function searchReq(params) {
-	    return req(url + 'search?text=' + params);
+	    return req(url + 'search' + params);
+	}
+	function openSearch() {
+	    return {
+	        type: 'OPEN_SEARCH',
+	        promise: _reactRouter.browserHistory.push('/search')
+	    };
 	}
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "actions.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 242 */
+/* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// the whatwg-fetch polyfill installs the fetch() function
 	// on the global object (window or self)
 	//
 	// Return that as the export for use in Webpack, Browserify etc.
-	__webpack_require__(243);
+	__webpack_require__(241);
 	module.exports = self.fetch.bind(self);
 
 
 /***/ },
-/* 243 */
+/* 241 */
 /***/ function(module, exports) {
 
 	(function(self) {
@@ -27257,6 +27109,205 @@
 
 
 /***/ },
+/* 242 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _ListInfo = __webpack_require__(243);
+
+	var _ListInfo2 = _interopRequireDefault(_ListInfo);
+
+	var _redux = __webpack_require__(165);
+
+	var _actions = __webpack_require__(239);
+
+	var Actions = _interopRequireWildcard(_actions);
+
+	var _reactRedux = __webpack_require__(159);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var HomePage = _react2.default.createClass({
+	    displayName: 'HomePage',
+	    componentWillMount: function componentWillMount() {
+	        this.props.actions.getPost();
+	        //this.props.actions.getCompanys();
+	    },
+
+
+	    render: function render() {
+	        var actions = this.props.actions;
+	        var post = this.props.posts;
+	        return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'NewsColumn' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'Post' },
+	                    _react2.default.createElement(
+	                        'h2',
+	                        { className: 'TextHome' },
+	                        'Users'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        post.map(function (post) {
+	                            return _react2.default.createElement(_ListInfo2.default, { key: post._id, data: post, action: function action(_action) {
+	                                    return actions.getProfileData(_action);
+	                                } });
+	                        })
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+	var NewsColumnn = _react2.default.createClass({
+	    displayName: 'NewsColumnn',
+
+	    render: function render() {
+	        return _react2.default.createElement('p', null);
+	    }
+	});
+	function ratingSort(a, b) {
+	    return b.rating - a.rating;
+	}
+	function states(state) {
+	    return {
+	        status: state.status,
+	        companys: state.companys,
+	        posts: state.posts
+	    };
+	}
+
+	function actions(dispatch) {
+	    return {
+	        actions: (0, _redux.bindActionCreators)(Actions, dispatch)
+	    };
+	}
+	exports.default = (0, _reactRedux.connect)(states, actions)(HomePage);
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "HomePage.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _reactRouter = __webpack_require__(181);
+
+	var React = __webpack_require__(1);
+
+	var ListInfo = React.createClass({
+	    displayName: 'ListInfo',
+
+	    render: function render() {
+	        var _this = this;
+
+	        return React.createElement(
+	            'div',
+	            { className: 'card' },
+	            React.createElement(
+	                'header',
+	                { className: 'card-header' },
+	                React.createElement(
+	                    'h3',
+	                    { className: 'NameText' },
+	                    React.createElement(
+	                        _reactRouter.Link,
+	                        { to: '/' + this.props.data._id },
+	                        this.props.data.name || this.props.data.login
+	                    )
+	                )
+	            ),
+	            React.createElement(
+	                'div',
+	                { className: 'card-body' },
+	                React.createElement(
+	                    'div',
+	                    { className: 'card-info' },
+	                    React.createElement(
+	                        'div',
+	                        { className: 'card-info1' },
+	                        this.props.data.description
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { className: 'card-info1' },
+	                        React.createElement(
+	                            'h4',
+	                            null,
+	                            'Contacts:'
+	                        ),
+	                        this.props.data.contacts ? React.createElement(
+	                            'div',
+	                            null,
+	                            React.createElement('i', { className: 'phone icon' }),
+	                            this.props.data.contacts.phone
+	                        ) : null,
+	                        this.props.data.contacts ? React.createElement(
+	                            'div',
+	                            null,
+	                            React.createElement('i', { className: 'at icon' }),
+	                            this.props.data.contacts.mail
+	                        ) : null,
+	                        this.props.data.location ? React.createElement(
+	                            'div',
+	                            null,
+	                            React.createElement('i', { className: 'marker icon' }),
+	                            this.props.data.location
+	                        ) : null
+	                    )
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { className: 'card-image' },
+	                    React.createElement('img', { className: 'card-image',
+	                        src: this.props.data.picture,
+	                        width: '150px', height: '150px' }),
+	                    React.createElement(
+	                        'button',
+	                        { className: 'primary card-button',
+	                            onClick: function onClick() {
+	                                return _this.props.action(_this.props.data._id);
+	                            }
+	                        },
+	                        'view profile'
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+	exports.default = ListInfo;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "ListInfo.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
 /* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -27276,7 +27327,7 @@
 
 	var _reactRouter = __webpack_require__(181);
 
-	var _actions = __webpack_require__(241);
+	var _actions = __webpack_require__(239);
 
 	__webpack_require__(245);
 
@@ -27285,10 +27336,16 @@
 	var Profile = _react2.default.createClass({
 	    displayName: 'Profile',
 	    componentWillMount: function componentWillMount() {
+	        //this.props.dispatch(getProfileData(this.props.params.user));
+	        //this.props.route.onChange(this.props.params.user);
+	        console.log(this.props);
+	    },
+	    go: function go() {
 	        this.props.dispatch((0, _actions.getProfileData)(this.props.params.user));
 	    },
 
 	    render: function render() {
+
 	        var settings;
 	        if (this.props.userData.login === this.props.Profile.login) {
 	            settings = _react2.default.createElement(Settings, null);
@@ -27613,7 +27670,7 @@
 
 
 	// module
-	exports.push([module.id, ".profile {\r\n    display: flex;\r\n    flex-direction: column;\r\n    background-color: white;\r\n}\r\n.profile-header {\r\n    display: flex;\r\n    flex-direction: row;\r\n    border-bottom: solid 2px #edeeee;\r\n}\r\n.profile-body {\r\n    display: flex;\r\n    flex-direction: row;\r\n    flex-wrap: wrap;\r\n}\r\n.contacts {\r\n    flex-shrink: 0;\r\n    flex-basis: 203px;\r\n    padding: 20px 15px;\r\n    flex-grow: 1;\r\n    border-right: solid 1px #edeeee;\r\n    border-bottom: solid 1px #edeeee;\r\n}\r\n.comment {\r\n    margin-bottom: 5px;\r\n    padding: 10px;\r\n    background: #ffffff;\r\n    min-width: 400px;\r\n    border: solid 1px #edeeee;\r\n    border-radius: 5px;\r\n    display: flex;\r\n}\r\n.content {\r\n    flex-wrap: wrap;\r\n    flex-grow: 3;\r\n    flex-basis: 450px;\r\n}\r\n.about {\r\n    padding: 20px 15px;\r\n    border-bottom: solid 1px #edeeee;\r\n}\r\n.header-main {\r\n    width: 100%;\r\n    justify-content: space-around;\r\n    padding: 20px;\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: baseline;\r\n}\r\n.header-second {\r\n    padding: 20px 1px 0px 3px;\r\n    font-weight: bold;\r\n    justify-content: space-around;\r\n    font-size: 15px;\r\n    display: flex;\r\n    flex-direction: row;\r\n    color: #6F7276;\r\n    align-self: stretch;\r\n}\r\nbutton.settings {\r\n    color: black;\r\n}\r\n.comments {\r\n    background-color: #FAFAFA;\r\n    padding: 10px;\r\n}\r\n.item {\r\n    height: 37px;\r\n    padding: 0px 10px;\r\n}\r\n.ImageProfile{\r\n    width: 130px;\r\n    height: 130px;\r\n    margin: 5px;\r\n    border-radius: 5px;\r\n    object-fit: cover;\r\n}\r\n.MarkerProfile {\r\n    color: white;\r\n    font-weight: 600;\r\n    background-color: #1ABC9C;\r\n    margin:5px 0px 5px;\r\n    border-radius: 5px;\r\n    font-size: 30px;\r\n    padding: 5px 10px;\r\n    width: 300px;\r\n    text-align: center;\r\n}\r\n.ProfileNameText{\r\n    font-size: 40px;\r\n    text-transform : uppercase;\r\n    font-weight: 600;\r\n    margin:10px;\r\n    text-align: center;\r\n}\r\n.ProfileDescriptionText{\r\n    font-size: 30px;\r\n    margin:20px;\r\n    text-align: center;\r\n}\r\n.ProfileTextMyself{\r\n    text-indent: 20px;\r\n    margin: 5px 10px;\r\n}\r\n.ProfileContactIco{\r\n    width: 20px;\r\n    height: 20px;\r\n    object-fit: contain;\r\n    margin:5px 20px;\r\n    vertical-align: middle;\r\n}\r\n.FlexEnd{\r\n    flex-direction: row-reverse;\r\n}\r\n.BlockComent {\r\n    padding: 10px;\r\n    background: #ffffff;\r\n    min-width: 400px;\r\n    border: solid 1px #edeeee;\r\n    border-radius: 5px;\r\n}\r\n.item3p{\r\n    order: 0;\r\n    height: auto;\r\n    margin: 0px;\r\n    padding: 0px;\r\n    flex-basis: 250px;\r\n    height: auto;\r\n    margin: 10px;\r\n}\r\n.item2p{\r\n    order: 2;\r\n    height: auto;\r\n    margin: 0px;\r\n    padding: 0px;\r\n    flex-basis: 690px;\r\n    height: auto;\r\n    margin: 10px;\r\n}\r\n.item1p{\r\n    order: 1;\r\n    height: auto;\r\n    margin: 0px;\r\n    padding: 0px;\r\n    flex-basis: 330px;\r\n    margin: 10px;\r\n}\r\n.SettingProfileButton{\r\n  margin: 0px;\r\n}\r\n", ""]);
+	exports.push([module.id, ".profile {\r\n    display: flex;\r\n    flex-direction: column;\r\n    background-color: white;\r\n}\r\n.profile-header {\r\n    display: flex;\r\n    flex-direction: row;\r\n    border-bottom: solid 2px #edeeee;\r\n}\r\n.profile-body {\r\n    display: flex;\r\n    flex-direction: row;\r\n    flex-wrap: wrap;\r\n}\r\n.contacts {\r\n    flex-shrink: 0;\r\n    flex-basis: 203px;\r\n    padding: 20px 15px;\r\n    flex-grow: 1;\r\n    border-right: solid 1px #edeeee;\r\n    border-bottom: solid 1px #edeeee;\r\n}\r\n.comment {\r\n    margin-bottom: 5px;\r\n    padding: 10px;\r\n    background: #ffffff;\r\n    min-width: 400px;\r\n    border: solid 1px #edeeee;\r\n    border-radius: 5px;\r\n    display: flex;\r\n}\r\n.content {\r\n    flex-wrap: wrap;\r\n    flex-grow: 3;\r\n    flex-basis: 450px;\r\n}\r\n.about {\r\n    padding: 20px 15px;\r\n    border-bottom: solid 1px #edeeee;\r\n}\r\n.header-main {\r\n    justify-content: space-around;\r\n    padding: 20px;\r\n    display: flex;\r\n    flex-direction: row;\r\n    align-items: baseline;\r\n}\r\n.header-second {\r\n    padding: 20px 1px 0px 3px;\r\n    font-weight: bold;\r\n    justify-content: space-around;\r\n    font-size: 15px;\r\n    display: flex;\r\n    flex-direction: row;\r\n    color: #6F7276;\r\n    align-self: stretch;\r\n}\r\nbutton.settings {\r\n    color: black;\r\n}\r\n.comments {\r\n    background-color: #FAFAFA;\r\n    padding: 10px;\r\n}\r\n.item {\r\n    height: 37px;\r\n    padding: 0px 10px;\r\n}\r\n.ImageProfile{\r\n    width: 130px;\r\n    height: 130px;\r\n    margin: 5px;\r\n    border-radius: 5px;\r\n    object-fit: cover;\r\n}\r\n", ""]);
 
 	// exports
 
@@ -27944,11 +28001,15 @@
 
 	var _reactRedux = __webpack_require__(159);
 
-	var _actions = __webpack_require__(241);
+	var _redux = __webpack_require__(165);
+
+	var _actions = __webpack_require__(239);
 
 	var Actions = _interopRequireWildcard(_actions);
 
 	var _reactRouter = __webpack_require__(181);
+
+	__webpack_require__(250);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -27961,29 +28022,31 @@
 	        return { open: false };
 	    },
 	    componentWillMount: function componentWillMount() {
-	        this.props.dispatch(Actions.InitialUser());
+	        // this.props.dispatch(Actions.InitialUser());
+	        this.props.actions.InitialUser();
 	    },
 
 	    Click: function Click() {
-	        this.props.dispatch(Actions.signout());
+	        this.props.actions.signout();
 	    },
 	    goTo: function goTo() {
 	        _reactRouter.browserHistory.push('/' + this.props.userData._id);
+	        console.log(this.props);
 	    },
 	    render: function render() {
-	        var panel = function panel(Click, userData, goTo) {
-	            if (userData.login == null) {
+	        var panel = function panel(Click, props, goTo) {
+	            if (props.userData.login == null) {
 	                return _react2.default.createElement(
 	                    'div',
 	                    { className: 'LeftBtnPanel' },
 	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: 'search' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'MenuRightBtn' },
-	                            'Search'
-	                        )
+	                        'div',
+	                        { className: 'MenuRightBtn',
+	                            onClick: function onClick() {
+	                                return props.actions.openSearch();
+	                            }
+	                        },
+	                        'Search'
 	                    ),
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
@@ -28009,13 +28072,13 @@
 	                    'div',
 	                    { className: 'LeftBtnPanel' },
 	                    _react2.default.createElement(
-	                        _reactRouter.Link,
-	                        { to: 'search' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'MenuRightBtn' },
-	                            'Search'
-	                        )
+	                        'div',
+	                        { className: 'MenuRightBtn',
+	                            onClick: function onClick() {
+	                                return props.actions.openSearch();
+	                            }
+	                        },
+	                        'Search'
 	                    ),
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
@@ -28037,16 +28100,18 @@
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'MenuRightBtn',
-	                            onClick: goTo
+	                            onClick: function onClick() {
+	                                return props.actions.getProfileData(props.userData._id);
+	                            }
 	                        },
-	                        userData.login
+	                        props.userData.login
 	                    )
 	                );
 	            }
 	        };
 	        return _react2.default.createElement(
 	            'div',
-	            null,
+	            { className: 'app' },
 	            _react2.default.createElement(
 	                'div',
 	                { className: 'Nav' },
@@ -28062,20 +28127,16 @@
 	                            'JobBox'
 	                        )
 	                    ),
-	                    panel(this.Click, this.props.userData, this.goTo)
+	                    panel(this.Click, this.props, this.goTo)
 	                )
 	            ),
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'demo' },
-	                this.props.children
-	            ),
+	            this.props.children,
 	            _react2.default.createElement(
 	                'div',
 	                { className: 'footer' },
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'DFlex FooterButtonPosition' },
+	                    { className: 'FooterButtonPosition' },
 	                    _react2.default.createElement(
 	                        _reactRouter.Link,
 	                        { to: '/about' },
@@ -28105,17 +28166,63 @@
 	        );
 	    }
 	});
-
-	exports.default = (0, _reactRedux.connect)(function (state) {
+	function states(state) {
 	    return {
 	        userData: state.userData
 	    };
-	})(Header);
+	}
+
+	function actions(dispatch) {
+	    return {
+	        actions: (0, _redux.bindActionCreators)(Actions, dispatch)
+	    };
+	}
+	exports.default = (0, _reactRedux.connect)(states, actions)(Header);
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Header.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 250 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(251);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(248)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./header-footer.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./header-footer.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 251 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(247)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\r\n.Nav{\r\n  height: 65px;\r\n  margin: 0em;\r\n  padding: 0em;\r\n}\r\n.app{\r\n    display: flex;\r\n    flex-direction: column;\r\n    min-height: 150vh;\r\n    min-width: 480px;\r\n    justify-content: space-between;\r\n}\r\n.RowFlex{\r\n  width: 100%;\r\n  flex-direction:row;\r\n  justify-content:space-around;\r\n  display: flex;\r\n}\r\n.Menu{\r\n  text-transform: uppercase;\r\n  clear: both;\r\n  margin: 0em;\r\n  padding: 0em;\r\n  height: 65px;\r\n  background-color: #37474f;\r\n  color: #ffffff;\r\n  position: fixed;\r\n  z-index: 1;\r\n}\r\n.LeftBtnPanel{\r\n    display: flex;\r\n}\r\n.MenuLeftBtn{\r\n  margin: 17px 0px 0px 0px;\r\n  font-size: 30px;\r\n  cursor: pointer;\r\n  -moz-user-select: -moz-none;\r\n  -o-user-select: none;\r\n  -khtml-user-select: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n}\r\n.MenuLeftBtn:hover{\r\n  opacity: 0.4;\r\n}\r\n.MenuRightBtn{\r\n  margin: 20px 0px 0px 0px;\r\n  padding: 14px 7px;\r\n  font-size: 16px;\r\n  cursor: pointer;\r\n  -moz-user-select: -moz-none;\r\n  -o-user-select: none;\r\n  -khtml-user-select: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n}\r\n.MenuRightBtn:hover{\r\n  background: #5c6bc0;\r\n}\r\n.MenuName{\r\n  text-transform: none;\r\n  text-decoration: none;\r\n  font-size: 20px;\r\n}\r\na.ManuName{\r\n  color: #5c6bc0;\r\n  outline: none;\r\n}\r\na.MenuName:active,a.MenuName:focus{\r\n  color: #37474F;\r\n}\r\n.MenuButtonSignIn{\r\n  margin: 12.5px 10px 12.5px 30px;\r\n  padding: 10px;\r\n  cursor: pointer;\r\n  background: #5c6bc0;\r\n  color:#ffffff;\r\n  border:solid 2px #5c6bc0;\r\n}\r\n.MenuButtonSignIn:hover{\r\n  opacity: 0.6;\r\n}\r\n.MenuSignIn{\r\n  display: flex;\r\n}\r\n.MenuTextName{\r\n  margin-left: 30px;\r\n}\r\n  .footer {\r\n    background-color: #37474f;\r\n    text-align: center;\r\n    color: #fff;\r\n    padding-bottom: 11px;\r\n    align-self: flex-end;\r\n    width: 100%\r\n  }\r\n   .TextCenter{\r\n     text-align: center;\r\n   }\r\n   .FooterButton{\r\n     margin:0px;\r\n     padding:14px 10px;\r\n     font-size: 15px;\r\n     cursor: pointer;\r\n     -moz-user-select: -moz-none;\r\n     -o-user-select: none;\r\n     -khtml-user-select: none;\r\n     -webkit-user-select: none;\r\n     user-select: none;\r\n     text-transform: uppercase;\r\n   }\r\n   .FooterButton:hover{\r\n     background: #edeeee;\r\n     color: #37474f;\r\n   }\r\n   .FooterButtonPosition{\r\n     justify-content:center;\r\n   }\r\n   ", ""]);
+
+	// exports
+
+
+/***/ },
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -28128,7 +28235,9 @@
 
 	var _reactRedux = __webpack_require__(159);
 
-	var _actions = __webpack_require__(241);
+	var _actions = __webpack_require__(239);
+
+	__webpack_require__(253);
 
 	var React = __webpack_require__(1);
 
@@ -28269,7 +28378,47 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Registration.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 251 */
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(254);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(248)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./registration.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./registration.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(247)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".RegBlok{\r\n  background-color: rgba(118, 118, 118, 0.59);\r\n  display: flex;\r\n  flex-direction:row;\r\n  justify-content:space-around;\r\n  padding: 175px 0px;\r\n  flex-wrap: wrap;\r\n}\r\n.TextRegCompany{\r\n  text-align: center;\r\n  color: #ffffff;\r\n  font-weight:bolder;\r\n  font-size: 3em;\r\n  margin: 0em 1em 0.5em 0.7em;\r\n  cursor: default;\r\n  -moz-user-select: -moz-none;\r\n  -o-user-select: none;\r\n  -khtml-user-select: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n}\r\n.TextRegInfo{\r\n  text-align: center;\r\n  color: #ffffff;\r\n  font-weight:bolder;\r\n  font-size: 2em;\r\n  margin: 0em 1em 0.3em 1em;\r\n  cursor: default;\r\n  -moz-user-select: -moz-none;\r\n  -o-user-select: none;\r\n  -khtml-user-select: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n}\r\n.InputReg{\r\n  width: 300px;\r\n  padding: 8px;\r\n}\r\n.BtnReg{\r\n  width: 323px;\r\n  margin-top: 7px;\r\n}\r\n.RegAlignTextCenter{\r\n  text-align: center;\r\n}\r\n.InputCheckBoxText{\r\n  text-align: center;\r\n  font-size: 17px;\r\n  color: #edeeee;\r\n}\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 255 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -28284,17 +28433,15 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _actions = __webpack_require__(241);
+	var _actions = __webpack_require__(239);
 
 	var _reactRedux = __webpack_require__(159);
 
 	var _reactRouter = __webpack_require__(181);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	__webpack_require__(256);
 
-	/**
-	 * Created by Artsiom_Rakitski on 4/6/2016.
-	 */
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var SignIn = _react2.default.createClass({
 	    displayName: 'SignIn',
@@ -28404,7 +28551,47 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "SignIn.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 252 */
+/* 256 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(257);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(248)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./signin.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./signin.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 257 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(247)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".SignInTextRight{\r\n  text-align: center;\r\n  margin: 10px 0px;\r\n  -moz-user-select: -moz-none;\r\n  -o-user-select: none;\r\n  -khtml-user-select: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n  font-size: 20px;\r\n  cursor: default;\r\n}\r\n.SignInTextDisription{\r\n  text-align: center;\r\n  font-size: 30px;\r\n  margin-bottom: 10px;\r\n  -moz-user-select: -moz-none;\r\n  -o-user-select: none;\r\n  -khtml-user-select: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n  cursor: default;\r\n}\r\n.SignInTextCompany{\r\n  text-align: center;\r\n  font-size: 67px;\r\n  margin: 100px 0px 50px 0px;\r\n  -moz-user-select: -moz-none;\r\n  -o-user-select: none;\r\n  -khtml-user-select: none;\r\n  -webkit-user-select: none;\r\n  user-select: none;\r\n  cursor: default;\r\n}\r\n.SignBtton{\r\n  padding: 15px 20px;\r\n  margin: 20px 0px 100px 160px;\r\n  cursor: pointer;\r\n  outline: none;\r\n  font-size: 17px;\r\n  border-radius: 5px;\r\n  border: solid 2px;\r\n}\r\n.SignInput{\r\n  width: 400px;\r\n  font-size: 20px;\r\n  padding:10px 14px;\r\n  border:solid 1px #37474F;\r\n  border-radius: 3px;\r\n  background-color: #ffffff;\r\n}\r\n.SignColore{\r\n  padding: 80px 0px;\r\n  background: #5C6BC0;\r\n}\r\n.SignInButton{\r\n  background-color: #37474F;\r\n  border-color: #37474F;\r\n  color: #ffffff;\r\n}\r\n.SignUpButton{\r\n  background-color: #ffffff;\r\n  border-color: #37474F;\r\n  color:#37474F;\r\n}\r\n.SignUpButton:hover{\r\n  background-color: #37474F;\r\n  border-color: #37474F;\r\n  color:#ffffff;\r\n  opacity: 1;\r\n}\r\n.SignInButton:hover{\r\n  background-color: #ffffff;\r\n  border-color: #37474F;\r\n  color: #37474F;\r\n  opacity: 1;\r\n}\r\n.SignIn{\r\n  margin-top: 100px;\r\n  order: 0;\r\n}\r\n.SignUp{\r\n  order: 1;\r\n}\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 258 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -28421,7 +28608,9 @@
 
 	var _reactRedux = __webpack_require__(159);
 
-	var _actions = __webpack_require__(241);
+	var _actions = __webpack_require__(239);
+
+	__webpack_require__(259);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28875,7 +29064,47 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Settings.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 253 */
+/* 259 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(260);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(248)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./settings.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./settings.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(247)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".item2s{\r\n    flex-grow: 2;\r\n    order: 1;\r\n    height: auto;\r\n    margin: 0px;\r\n    padding: 0px;\r\n    flex-basis: 593px;\r\n    flex-grow: 2;\r\n    background: #D7D7D7;\r\n    height: auto;\r\n    margin: 7px 7px 10px 8px;\r\n}\r\n.item1s {\r\n    flex-grow: 1;\r\n    order: 0;\r\n    height: auto;\r\n    margin: 0px;\r\n    padding: 0px;\r\n    flex-basis: 400px;\r\n    flex-grow: 1;\r\n    margin: 7px 8px 10px 7px;\r\n}\r\n.SettingsInfoText{\r\n    text-align: center;\r\n    padding: 10px;\r\n    background-color: #5C6BC0;\r\n    color: #ffffff;\r\n    font-size: 21px;\r\n    cursor: default;\r\n}\r\n.SettingsExpander{\r\n    cursor: pointer;\r\n    padding: 10px 30px;\r\n    font-size:17px;\r\n    background: #D7D7D7;\r\n}\r\n.SettingsExpander:hover{\r\n    background: #4CAF50;\r\n}\r\n.SettingsInput{\r\n    padding: 5px 10px;\r\n    font-size: 18px;\r\n    margin: 5px 0px 0px 20px;\r\n    outline: none;\r\n    border-radius: 5px;\r\n    border: solid 1px #A9A9A9;\r\n    width: 83%;\r\n}\r\n.SettingsInput:focus{\r\n    border: solid 1px #4CAF50;\r\n}\r\n.SettingTextInput{\r\n    padding: 15px 0px 5px 50px;\r\n}\r\n.SettingUpdate{\r\n    border: none;\r\n    padding: 7px 10px;\r\n    font-size: 17px;\r\n    background: #1abc9c;\r\n    color: #ffffff;\r\n    margin: 30px 0px 15px 20px;\r\n    cursor: pointer;\r\n    outline: none;\r\n}\r\n.SettingUpdate:hover{\r\n    opacity: 0.6;\r\n}\r\n.SettingDontKnow{\r\n    border: none;\r\n    cursor: pointer;\r\n    padding: 0px;\r\n    font-size: 14px;\r\n    background: none;\r\n    outline: none;\r\n    margin-left: 70px;\r\n    color: #000;\r\n}\r\n.SettingDontKnow:hover{\r\n    color:#FF5722;\r\n    background: none;\r\n}\r\n\r\n.SettingContent {\r\n    display: flex;\r\n    flex-direction:row;\r\n    justify-content:space-around;\r\n    flex-wrap:nowrap;\r\n    margin: 10px;\r\n}\r\n.SettingName{\r\n    text-align: center;\r\n    margin:5px 0px 30px 0px;\r\n    color:#fff;\r\n  }\r\n.GreenBtn{\r\n  background-color: #74C658;\r\n  border: solid 2px #74C658;\r\n}\r\n.SettingConteiner{\r\n    display: flex;\r\n}\r\n.SettingBtn{\r\n    border:solid 2px #1abc9c;\r\n    border-radius: 4px;\r\n    cursor: pointer;\r\n    background-color: #1abc9c;\r\n    padding: 5px 20px;\r\n    font-size: 1em;\r\n    margin: 46px 0px 10px 355px;\r\n    color: #000000;\r\n}\r\n.SettingInput{\r\n    margin: 0em 0.8em 0.8em 0em;\r\n    padding: 0.5em;\r\n    font-size: 0.8em;\r\n    width: 32.4em;\r\n    border-radius: 5px;\r\n    background-color: #E9E9E9;\r\n}\r\n.SettingTextarea{\r\n    margin: 0em 0.8em -40px 0em;\r\n    padding: 0.5em;\r\n    font-size: 1em;\r\n    width: 32em;\r\n    height: 5em;\r\n    border-radius: 5px;\r\n    border: 2px inset;\r\n    resize: none;\r\n    background-color: #E9E9E9;\r\n}\r\n.SettingTextarea:focus{\r\n    outline:none;\r\n    border: 2px solid #1abc9c;\r\n}\r\n.SettingTextarea:hover{\r\n    outline:none;\r\n}\r\n.SettingBtn:hover{\r\n    border:solid 2px #000000;\r\n    background-color: #ffffff;\r\n}\r\n.SettingBtn:focus{\r\n    border:solid 2px #1abc9c;\r\n    background-color: #1abc9c;\r\n    outline: none;\r\n}\r\n.SettingBtn:active{\r\n    border:solid 2px #000000;\r\n    background-color: #ffffff;\r\n}\r\n.SettingInput:active{\r\n    color: #ffffff;\r\n}\r\n.SettingInput:focus{\r\n    outline:none;\r\n    border: 2px solid #1abc9c;\r\n}\r\n.SettingImg{\r\n    width:397px;\r\n    height:397px;\r\n    border-radius: 10px;\r\n    margin: 5px 30px;\r\n}\r\n.SettingImgBtn {\r\n    position: relative;\r\n    overflow: hidden;\r\n    width: 35em;\r\n    height: 17px;\r\n    background: #ffffff;\r\n    border-radius: 3px;\r\n    padding: 8px 4px;\r\n    text-align: center;\r\n    margin: 5px 0px 10px 0px;\r\n    font-size: 0.8em;\r\n    border: 2px inset;\r\n    background-color: #E9E9E9;\r\n}\r\n.TextDataTime{\r\n  font-size: 12px;\r\n  margin: 2px 15px;\r\n  color: gray;\r\n}\r\n.text{\r\n  margin-bottom: 6px;\r\n}\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 261 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -28883,63 +29112,169 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _actions = __webpack_require__(241);
+	var _actions = __webpack_require__(239);
 
 	var _reactRedux = __webpack_require__(159);
 
 	var _reactRouter = __webpack_require__(181);
 
+	var _HomePage = __webpack_require__(242);
+
+	var _HomePage2 = _interopRequireDefault(_HomePage);
+
+	__webpack_require__(262);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Search = _react2.default.createClass({
-	    displayName: 'Search',
-	    render: function render() {
-	        return _react2.default.createElement(
-	            'div',
-	            { className: 'RowFlex' },
-	            _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement('input', { type: 'text', ref: 'text' }),
-	                _react2.default.createElement(
-	                    'button',
-	                    { onClick: this.search },
-	                    _react2.default.createElement('i', { className: 'search icon' })
-	                )
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'button',
-	                    { onClick: this.tags },
-	                    'repair'
-	                ),
-	                _react2.default.createElement(
-	                    'button',
-	                    null,
-	                    'авто'
-	                ),
-	                _react2.default.createElement(
-	                    'button',
-	                    null,
-	                    'прицепы'
-	                )
-	            )
-	        );
+	  displayName: 'Search',
+	  search: function search() {
+	    this.props.dispatch((0, _actions.search)(this.props.location.search));
+	  },
+	  tags: function tags(e) {
+	    if (!e.target.checked) {
+	      return _reactRouter.browserHistory.push('/search');
 	    }
+	    switch (e.target.id) {
+	      case '1':
+	        return _reactRouter.browserHistory.push('/search?rm=' + e.target.id);
+	      case '2':
+	        return _reactRouter.browserHistory.push('/search?eat=' + e.target.id);
+	      case '3':
+	        return _reactRouter.browserHistory.push('/search?fun=' + e.target.id);
+	      case '4':
+	        return _reactRouter.browserHistory.push('/search?des=' + e.target.id);
+	      case '5':
+	        return _reactRouter.browserHistory.push('/search?pr=' + e.target.id);
+	    }
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      { className: 'RowFlex JCC' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'item2 BorderRight' },
+	        _react2.default.createElement(
+	          'h2',
+	          { className: 'BorderBottom h2' },
+	          'Критерии поиска '
+	        ),
+	        _react2.default.createElement(
+	          'h4',
+	          { className: 'h4SC' },
+	          'Теги'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'SearchChet' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'toggle' },
+	            _react2.default.createElement('input', { type: 'checkbox', id: '1', onClick: this.tags }),
+	            _react2.default.createElement('label', { htmlFor: '1' })
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'SD' },
+	            'Ремонт'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'SearchChet' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'toggle' },
+	            _react2.default.createElement('input', { type: 'checkbox', id: '2', onClick: this.tags }),
+	            _react2.default.createElement('label', { htmlFor: '2' })
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'SD' },
+	            'Питание'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'SearchChet' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'toggle' },
+	            _react2.default.createElement('input', { type: 'checkbox', id: '3', onClick: this.tags }),
+	            _react2.default.createElement('label', { htmlFor: '3' })
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'SD' },
+	            'Развлечения'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'SearchChet' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'toggle' },
+	            _react2.default.createElement('input', { type: 'checkbox', id: '4', onClick: this.tags }),
+	            _react2.default.createElement('label', { htmlFor: '4' })
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'SD' },
+	            'Дизайн'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'SearchChet BorderBottom' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'toggle' },
+	            _react2.default.createElement('input', { type: 'checkbox', id: '5', onClick: this.tags }),
+	            _react2.default.createElement('label', { htmlFor: '5' })
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            { className: 'SD' },
+	            'Продукты'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'h4',
+	          { className: 'h4S' },
+	          'Местоположение'
+	        ),
+	        _react2.default.createElement('input', { className: 'SI', type: 'text' })
+	      ),
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'item1' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'BorderBottom' },
+	          _react2.default.createElement('input', { className: 'InputSearch', type: 'text', ref: 'text' }),
+	          _react2.default.createElement(
+	            'button',
+	            { className: 'BtnSearch', onClick: this.search },
+	            _react2.default.createElement('i', { className: 'search icon' })
+	          )
+	        )
+	      )
+	    );
+	  }
 	});
 	exports.default = (0, _reactRedux.connect)(function (state) {
-	    return {
-	        userData: state.userData
-	    };
+	  return {
+	    userData: state.userData
+	  };
 	})(Search);
 	/**
 	 * Created by Artsiom_Rakitski on 4/19/2016.
@@ -28948,7 +29283,47 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "Search.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 254 */
+/* 262 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(263);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(248)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./search.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./search.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(247)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".InputSearch{\r\n  width: 80%;\r\n  padding: 8px;\r\n  border-radius: 5px 0px 0px 5px;\r\n  border: solid 1px #37474F;\r\n  border-right: none;\r\n  margin:15px 0px 15px 15px;\r\n}\r\n.InputSearch:focus {\r\n  border: solid 1px #edeeee;\r\n  border-right: none;\r\n}\r\n.BtnSearch{\r\n  border-radius: 0px 5px 5px 0px;\r\n  border: solid 1px #37474F;\r\n  padding: 8px;\r\n}\r\n.JCC{\r\n  justify-content: center;\r\n}\r\n.BorderBottom{\r\n  border-bottom: solid 1px #edeeee;\r\n}\r\n.BorderRight{\r\n  border-right: solid 1px #edeeee;\r\n}\r\n.SearchChet{\r\n  padding: 15px 0px;\r\n}\r\n.SD{\r\n  margin-left: 75px;\r\n  font-size: 18px;\r\n}\r\n.h4S{\r\n  text-align: center;\r\n  margin-top: 10px;\r\n}\r\n.h4SC{\r\n  text-align: center;\r\n  margin-top: 10px;\r\n  margin-bottom: -10px;\r\n}\r\n.h2{\r\n  margin:42px 0px 21px;\r\n}\r\n.SI{\r\n  margin: 5px;\r\n}\r\n.item1{\r\nflex-basis:650px;\r\n}\r\n.item2{\r\nflex-basis:auto;\r\n}\r\n", ""]);
+
+	// exports
+
+
+/***/ },
+/* 264 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -28961,17 +29336,21 @@
 
 	var _redux = __webpack_require__(165);
 
-	var _reducers = __webpack_require__(255);
+	var _reducers = __webpack_require__(265);
 
 	var reducers = _interopRequireWildcard(_reducers);
 
-	var _reduxLogger = __webpack_require__(257);
+	var _reduxLogger = __webpack_require__(267);
 
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-	var _sendData = __webpack_require__(258);
+	var _sendData = __webpack_require__(268);
 
 	var _sendData2 = _interopRequireDefault(_sendData);
+
+	var _routing = __webpack_require__(269);
+
+	var _routing2 = _interopRequireDefault(_routing);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28979,7 +29358,7 @@
 
 	var reducer = (0, _redux.combineReducers)(reducers);
 	var logger = (0, _reduxLogger2.default)();
-	var cswm = (0, _redux.applyMiddleware)(_sendData2.default, logger)(_redux.createStore);
+	var cswm = (0, _redux.applyMiddleware)(_sendData2.default, _routing2.default, logger)(_redux.createStore);
 
 	var store = cswm(reducer, {
 	    status: null,
@@ -28991,7 +29370,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "state.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 255 */
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -29007,7 +29386,7 @@
 	exports.status = status;
 	exports.Profile = Profile;
 
-	var _user = __webpack_require__(256);
+	var _user = __webpack_require__(266);
 
 	var _user2 = _interopRequireDefault(_user);
 
@@ -29070,7 +29449,7 @@
 	    var action = arguments[1];
 
 	    switch (action.type) {
-	        case 'LOAD_USER_SUCCESS':
+	        case 'LOAD_PROFILE_SUCCESS':
 	            return Object.assign({}, state, {
 	                login: action.data.login,
 	                picture: action.data.picture,
@@ -29090,7 +29469,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 256 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -29152,7 +29531,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "user.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 257 */
+/* 267 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29385,7 +29764,7 @@
 	module.exports = createLogger;
 
 /***/ },
-/* 258 */
+/* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -29437,12 +29816,63 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "sendData.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 259 */
+/* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
-	"use strict";
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+	var _reactRouter = __webpack_require__(181);
+
+	var routing = function routing(store) {
+	    return function (next) {
+	        return function (action) {
+	            if (action.type !== 'ROUTING') {
+	                return next(action);
+	            }
+
+	            var _action$actions = _slicedToArray(action.actions, 3);
+
+	            var startAction = _action$actions[0];
+	            var successAction = _action$actions[1];
+	            var failAction = _action$actions[2];
+
+	            store.dispatch({
+	                type: startAction
+	            });
+	            _reactRouter.browserHistory.push(action.url);
+	            action.promise.then(function (data) {
+	                store.dispatch({
+	                    type: successAction,
+	                    data: data
+	                });
+	            }, function (error) {
+	                return store.dispatch({
+	                    type: failAction,
+	                    error: error
+	                });
+	            });
+	        };
+	    };
+	};
+	exports.default = routing;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "routing.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 270 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("D:\\Project\\node_modules\\react-hot-api\\modules\\index.js"), RootInstanceProvider = require("D:\\Project\\node_modules\\react-hot-loader\\RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -29452,111 +29882,113 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	__webpack_require__(271);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var About = _react2.default.createClass({
-	  displayName: "About",
+	  displayName: 'About',
 
 	  render: function render() {
 	    return _react2.default.createElement(
-	      "div",
+	      'div',
 	      null,
 	      _react2.default.createElement(
-	        "div",
-	        { className: "RowFlex ColorAbout" },
+	        'div',
+	        { className: 'RowFlex ColorAbout' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "TextAbout" },
-	          "About us"
+	          'div',
+	          { className: 'TextAbout' },
+	          'About us'
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "TextHistory" },
-	          "HISTORY OF CREATION"
+	          'div',
+	          { className: 'TextHistory' },
+	          'HISTORY OF CREATION'
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "TextHistoryDescription" },
-	          "Около полугода назад мы задумались, как можно помочь людям найти организацию для решения каких либо проблем. При этом расчитывать не на красивые, и к сожелению иногда лживые, слова рекламщиков. И мы решили сделать сервис для поиска организаций любого маштаба и предоставить им площадку для соревнования. На нашем ресурсе всё решается отзывами клиентов, чем лучше вы его обслужили, тем лучше отзыв, чем лучше отзыв, тем выше вы в поисковом запрос, тем вероятнее то, что вашу организацию выберет большее количество людей."
+	          'div',
+	          { className: 'TextHistoryDescription' },
+	          'Около полугода назад мы задумались, как можно помочь людям найти организацию для решения каких либо проблем. При этом расчитывать не на красивые, и к сожелению иногда лживые, слова рекламщиков. И мы решили сделать сервис для поиска организаций любого маштаба и предоставить им площадку для соревнования. На нашем ресурсе всё решается отзывами клиентов, чем лучше вы его обслужили, тем лучше отзыв, чем лучше отзыв, тем выше вы в поисковом запрос, тем вероятнее то, что вашу организацию выберет большее количество людей.'
 	        )
 	      ),
 	      _react2.default.createElement(
-	        "div",
-	        { className: "TextTeam" },
-	        "Join the team"
+	        'div',
+	        { className: 'TextTeam' },
+	        'Join the team'
 	      ),
 	      _react2.default.createElement(
-	        "div",
-	        { className: "PanelAbout" },
+	        'div',
+	        { className: 'PanelAbout' },
 	        _react2.default.createElement(
-	          "button",
-	          { className: "ButtonAbout" },
-	          "Design engineer"
+	          'button',
+	          { className: 'ButtonAbout' },
+	          'Design engineer'
 	        ),
 	        _react2.default.createElement(
-	          "button",
-	          { className: "ButtonAbout" },
-	          "Software engineer"
+	          'button',
+	          { className: 'ButtonAbout' },
+	          'Software engineer'
 	        )
 	      ),
 	      _react2.default.createElement(
-	        "div",
-	        { className: "AboutWorker" },
+	        'div',
+	        { className: 'AboutWorker' },
 	        _react2.default.createElement(
-	          "div",
-	          { className: "AboutMargin" },
+	          'div',
+	          { className: 'AboutMargin' },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "MenuName" },
-	            "Design developer"
+	            'div',
+	            { className: 'MenuName' },
+	            'Design developer'
 	          ),
 	          _react2.default.createElement(
-	            "div",
+	            'div',
 	            null,
-	            _react2.default.createElement("img", { className: "ImgAbout", src: "http://cs629530.vk.me/v629530469/333ed/XGMm17hCMUU.jpg", width: "180px", height: "180px" })
+	            _react2.default.createElement('img', { className: 'ImgAbout', src: 'http://cs629530.vk.me/v629530469/333ed/XGMm17hCMUU.jpg', width: '180px', height: '180px' })
 	          ),
 	          _react2.default.createElement(
-	            "a",
-	            { className: "MenuName", href: "https://www.facebook.com/profile.php?id=100003799963785" },
-	            "Vlad Salinov"
+	            'a',
+	            { className: 'MenuName', href: 'https://www.facebook.com/profile.php?id=100003799963785' },
+	            'Vlad Salinov'
 	          )
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "AboutMargin" },
+	          'div',
+	          { className: 'AboutMargin' },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "MenuName" },
-	            "Frontend engineer"
+	            'div',
+	            { className: 'MenuName' },
+	            'Frontend engineer'
 	          ),
 	          _react2.default.createElement(
-	            "div",
+	            'div',
 	            null,
-	            _react2.default.createElement("img", { className: "ImgAbout", src: "http://cs628025.vk.me/v628025197/32b3d/ymDqlPLtNvI.jpg", width: "180px", height: "180px" })
+	            _react2.default.createElement('img', { className: 'ImgAbout', src: 'http://cs628025.vk.me/v628025197/32b3d/ymDqlPLtNvI.jpg', width: '180px', height: '180px' })
 	          ),
 	          _react2.default.createElement(
-	            "a",
-	            { className: "MenuName", href: "https://www.facebook.com/Braymanrun" },
-	            "Artem Rakitski"
+	            'a',
+	            { className: 'MenuName', href: 'https://www.facebook.com/Braymanrun' },
+	            'Artem Rakitski'
 	          )
 	        ),
 	        _react2.default.createElement(
-	          "div",
-	          { className: "AboutMargin" },
+	          'div',
+	          { className: 'AboutMargin' },
 	          _react2.default.createElement(
-	            "div",
-	            { className: "MenuName" },
-	            "Backend engineer"
+	            'div',
+	            { className: 'MenuName' },
+	            'Backend engineer'
 	          ),
 	          _react2.default.createElement(
-	            "div",
+	            'div',
 	            null,
-	            _react2.default.createElement("img", { className: "ImgAbout", src: "http://cs628623.vk.me/v628623703/124a3/LfYfm5_XhDE.jpg", width: "180px", height: "180px" })
+	            _react2.default.createElement('img', { className: 'ImgAbout', src: 'http://cs628623.vk.me/v628623703/124a3/LfYfm5_XhDE.jpg', width: '180px', height: '180px' })
 	          ),
 	          _react2.default.createElement(
-	            "a",
-	            { className: "MenuName", href: "https://www.facebook.com/profile.php?id=100011018440746&pnref=lhc.friends" },
-	            "Yury Orgish"
+	            'a',
+	            { className: 'MenuName', href: 'https://www.facebook.com/profile.php?id=100011018440746&pnref=lhc.friends' },
+	            'Yury Orgish'
 	          )
 	        )
 	      )
@@ -29566,6 +29998,46 @@
 	exports.default = About;
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("D:\\Project\\node_modules\\react-hot-loader\\makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "About.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(272);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(248)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../node_modules/css-loader/index.js!./about.css", function() {
+				var newContent = require("!!./../node_modules/css-loader/index.js!./about.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 272 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(247)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".TextAbout{\r\n  margin-top: -1px;\r\n  padding: 120px 0px 10px;\r\n  font-size: 40px;\r\n  width: 100%;\r\n  text-align: center;\r\n  -webkit-touch-callout: none;\r\n  -webkit-user-select: none;\r\n  -khtml-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n  cursor: default;\r\n}\r\ndiv.TextHistory:before, div.TextHistory:after {\r\n    content: \"\";\r\n    width: 70px;\r\n    height: 6px;\r\n    border-top: 1px solid #ffffff;\r\n    display: inline-block;\r\n    margin: 0 10px;\r\n}\r\n.TextHistory{\r\n  width: 100%;\r\n  font-size: 20px;\r\n  font-weight: 600;\r\n  text-align: center;\r\n  -webkit-touch-callout: none;\r\n  -webkit-user-select: none;\r\n  -khtml-user-select: none;\r\n  -moz-user-select: none;\r\n  -ms-user-select: none;\r\n  user-select: none;\r\n  cursor: default;\r\n}\r\n.TextHistoryDescription{\r\n    letter-spacing: 0.5px;\r\n    max-width: 600px;\r\n    margin: 30px auto;\r\n    line-height: 24px;\r\n    font-size: 15px;\r\n    padding: 0px 35px;\r\n    -webkit-touch-callout: none;\r\n    -webkit-user-select: none;\r\n    -khtml-user-select: none;\r\n    -moz-user-select: none;\r\n    -ms-user-select: none;\r\n    user-select: none;\r\n    cursor: default;\r\n}\r\n.ColorAbout{\r\n  color:#ffffff;\r\n  background-color: #37474f;\r\n  margin-top: -2px;\r\n}\r\n.TextTeam{\r\n    margin: 30px auto 0px;\r\n    width: 200px;\r\n    text-align: center;\r\n    padding: 10px 0px;\r\n    font-size: 22px;\r\n    border-bottom: 1px solid #CECECE;\r\n    -webkit-touch-callout: none;\r\n    -webkit-user-select: none;\r\n    -khtml-user-select: none;\r\n    -moz-user-select: none;\r\n    -ms-user-select: none;\r\n    user-select: none;\r\n    cursor: default;\r\n}\r\n.PanelAbout{\r\n  text-align: center;\r\n  margin: 30px 0px;\r\n  flex-wrap: wrap;\r\n}\r\n.ButtonAbout{\r\n  padding: 20px;\r\n  width: 220px;\r\n  margin: 5px 10px;\r\n  font-size: 20px;\r\n  border: solid 0.5px #37474F;\r\n  background: none;\r\n  cursor: pointer;\r\n  color: #37474F;\r\n  outline:none;\r\n}\r\n.ButtonAbout:hover,.ButtonAbout:focus{\r\n  background: #37474F;\r\n  color:#ffffff;\r\n}\r\n.AboutWorker{\r\n  text-align:center;\r\n  margin: 50px 0px 120px;\r\n  justify-content: center;\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n}\r\n.ImgAbout{\r\n  border-radius: 50%;\r\n  margin: 12px 0px 5px;\r\n  object-fit: cover;\r\n}\r\n.AboutMargin{\r\n  margin: 20px 60px;\r\n}\r\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);
