@@ -26592,8 +26592,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// const url = 'https://gentle-meadow-48046.herokuapp.com/';
-	var url = 'http://10.26.11.88/';
+	var url = 'https://gentle-meadow-48046.herokuapp.com/';
+	// const url = 'http://10.26.11.88/';
 	function routeAction(actions, url, promise) {
 	    return {
 	        type: 'ROUTING',
