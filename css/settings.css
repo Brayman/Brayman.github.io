@@ -16,7 +16,7 @@
     height: auto;
     margin: 0px;
     padding: 0px;
-    flex-basis: 400px;
+    flex-basis: 270px;
     flex-grow: 1;
     margin: 7px 8px 10px 7px;
 }
@@ -36,6 +36,15 @@
 }
 .SettingsExpander:hover{
     background: #4CAF50;
+}
+.SettingSelect{
+    padding: 5px 10px;
+    font-size: 18px;
+    margin: 5px 0px 0px 20px;
+    outline: none;
+    border-radius: 5px;
+    border: solid 1px #A9A9A9;
+    width: 86%;
 }
 .SettingsInput{
     padding: 5px 10px;
@@ -63,7 +72,7 @@
     outline: none;
 }
 .SettingUpdate:hover{
-    opacity: 0.6;
+    background-color: #1ad2b1;
 }
 .SettingDontKnow{
     border: none;
@@ -182,4 +191,10 @@
 }
 .text{
   margin-bottom: 6px;
+}
+.RadioButton{
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-left: 20px;
 }

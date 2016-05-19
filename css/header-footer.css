@@ -1,14 +1,17 @@
-
+.content {
+  flex-grow: 1;
+}
 .Nav{
   height: 65px;
   margin: 0em;
   padding: 0em;
+  width: auto;
 }
 .app{
     display: flex;
     flex-direction: column;
-    min-height: 150vh;
     min-width: 480px;
+   min-height: 799px;
     justify-content: space-between;
 }
 .RowFlex{
@@ -32,7 +35,7 @@
     display: flex;
 }
 .MenuLeftBtn{
-  margin: 17px 0px 0px 0px;
+  margin: 16px 0px 0px 0px;
   font-size: 30px;
   cursor: pointer;
   -moz-user-select: -moz-none;
@@ -46,8 +49,8 @@
 }
 .MenuRightBtn{
   margin: 20px 0px 0px 0px;
-  padding: 14px 7px;
-  font-size: 16px;
+  padding: 14px 5px;
+  font-size: 15px;
   cursor: pointer;
   -moz-user-select: -moz-none;
   -o-user-select: none;
@@ -111,10 +114,12 @@ a.MenuName:active,a.MenuName:focus{
      text-transform: uppercase;
    }
    .FooterButton:hover{
-     background: #edeeee;
-     color: #37474f;
+     background: #5c6bc0;
+     color: white;
    }
    .FooterButtonPosition{
+     display: flex;
      justify-content:center;
+     margin-bottom: 5px;
    }
    
